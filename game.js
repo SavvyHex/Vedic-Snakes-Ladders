@@ -65,7 +65,7 @@ const game = new Phaser.Game(config);
 
 // ---PRELOAD FUNCTION ---
 function preload() {
-    
+}
 
 // ---CREATE FUNCTION ---
 function create() {
@@ -179,4 +179,4 @@ function touchGate(player, gate) {
         this.scene.restart();
     }
 }
-}
+
