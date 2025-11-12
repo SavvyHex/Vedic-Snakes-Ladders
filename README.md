@@ -1,1 +1,1 @@
-# Vedic-Snakes-Ladders
+# Vedic-2d-Side-Scroller-Quiz-game
