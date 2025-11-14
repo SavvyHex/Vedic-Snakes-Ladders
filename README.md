@@ -1,8 +1,6 @@
 # Vedic Snakes & Ladders — React + Phaser
 
-This repository was converted from a vanilla JS Phaser project into a React + Vite project.
-
-Quick start
+## Installation
 
 1. Install dependencies
 
@@ -18,7 +16,13 @@ npm run dev
 
 The app runs at the URL printed by Vite (usually http://localhost:5173).
 
-Notes
+## Gameplay
 
-- Phaser game logic has been embedded in `src/components/PhaserGame.jsx`.
-- Level data is in `src/data/levelData.js`.
+### Controls
+
+`W` `A` `S` `D` keys or arrow keys
+
+### Objectives
+
+- Collect all the vedas in one level
+- Answer a final question at the end of each level to progress in the game
