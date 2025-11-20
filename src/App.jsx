@@ -22,14 +22,13 @@ export default function App() {
   const handleVedaCollection = () => {
     setScore(prev => prev + 1);
 
-    // Pick a random quote to display in the sidebar
-    if (vedaTexts) {
-        const categories = Object.keys(vedaTexts); 
-        if (categories.length > 0) {
-            const randomCat = categories[Math.floor(Math.random() * categories.length)];
-            const quotes = vedaTexts[randomCat];
+    // Pick a random quote from the current level's category
+    if (vedaTexts && currentLevelData.vedaCategory) {
+        const quotes = vedaTexts[currentLevelData.vedaCategory];
+        
+        if (quotes && quotes.length > 0) {
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-            setCollectedText(prev => [{ category: randomCat, text: randomQuote }, ...prev]);
+            setCollectedText(prev => [{ category: currentLevelData.vedaCategory, text: randomQuote }, ...prev]);
         }
     }
   };

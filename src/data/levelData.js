@@ -1,6 +1,7 @@
 const levelData = [ 
     {
         levelName: "Level 1",
+        vedaCategory: "Ignorance (Avidya)",
         backgroundColor: '#000000',
         totalVedas: 3,
         vedas: [
@@ -15,6 +16,7 @@ const levelData = [
     },
     {
         levelName: 'Desire',
+        vedaCategory: "Desire (Kama–Krodha)",
         backgroundColor: '#001f3f', 
         totalVedas: 4,
         vedas: [
@@ -30,6 +32,7 @@ const levelData = [
     },
     {
         levelName: 'Ethics',
+        vedaCategory: "Ethics (Dharma)",
         backgroundColor: '#0b3d91',
         totalVedas: 4,
         vedas: [
@@ -45,6 +48,7 @@ const levelData = [
     },
     {
         levelName: 'Knowledge',
+        vedaCategory: "Knowledge (Jnana)",
         backgroundColor: '#1e3d59',
         totalVedas: 4,
         vedas: [
@@ -60,6 +64,7 @@ const levelData = [
     },
     {
         levelName: 'Devotion',
+        vedaCategory: "Devotion (Bhakti)",
         backgroundColor: '#4b1f4f',
         totalVedas: 5,
         vedas: [
@@ -76,6 +81,7 @@ const levelData = [
     },
     {
         levelName: 'Meditation',
+        vedaCategory: "Meditation (Dhyana)",
         backgroundColor: '#013220',
         totalVedas: 4,
         vedas: [
@@ -91,6 +97,7 @@ const levelData = [
     },
     {
         levelName: 'Liberation',
+        vedaCategory: "Liberation (Moksha)",
         backgroundColor: '#8b5a2b',
         totalVedas: 3,
         vedas: [
