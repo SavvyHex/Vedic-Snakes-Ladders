@@ -56,10 +56,22 @@ export default function App() {
   };
 
   const handleSubmitAnswer = () => {
-    // Compare answer (case-insensitive)
-    const correctAnswer = currentLevelData.quiz.answer;
+    // Compare answer (case-insensitive) - accept both English and Sanskrit versions
+    const correctAnswers = {
+      0: ['ignorance', 'avidya'],
+      1: ['desire', 'kama', 'krodha'],
+      2: ['ethics', 'dharma'],
+      3: ['knowledge', 'jnana'],
+      4: ['devotion', 'bhakti'],
+      5: ['meditation', 'dhyana'],
+      6: ['liberation', 'moksha']
+    };
     
-    if (userAnswer.trim().toLowerCase() === correctAnswer.toLowerCase()) {
+    const validAnswers = correctAnswers[currentLevel] || [];
+    const userLower = userAnswer.trim().toLowerCase();
+    const isCorrect = validAnswers.some(answer => userLower === answer);
+    
+    if (isCorrect) {
       alert("Correct! Ascending to the next realm...");
       
       // Reset State for Next Level
