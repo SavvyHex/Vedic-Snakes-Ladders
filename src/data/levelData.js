@@ -10,7 +10,7 @@ const levelData = [
             { x: 600, y: 450 }
         ],
         quiz: {
-            question: "LEVEL 1: What is the first stage of spiritual growth?\n(Type 'Ignorance')",
+            question: "What is the first stage of spiritual growth?",
             answer: "ignorance"
         }
     },
@@ -26,7 +26,7 @@ const levelData = [
             { x: 700, y: 500 }
         ],
         quiz: {
-            question: "LEVEL 2: What follows Ignorance?\n(Type 'Desire')",
+            question: "What follows Ignorance?",
             answer: "desire"
         }
     },
@@ -42,7 +42,7 @@ const levelData = [
             { x: 400, y: 480 }
         ],
         quiz: {
-            question: "LEVEL 3: Which principle guides right action?\n(Type 'Ethics')",
+            question: "Which principle guides right action?",
             answer: "ethics"
         }
     },
@@ -58,7 +58,7 @@ const levelData = [
             { x: 720, y: 220 }
         ],
         quiz: {
-            question: "LEVEL 4: What opens the path of deep seeing?\n(Type 'Knowledge')",
+            question: "What opens the path of deep seeing?",
             answer: "knowledge"
         }
     },
@@ -75,7 +75,7 @@ const levelData = [
             { x: 600, y: 460 }
         ],
         quiz: {
-            question: "LEVEL 5: Which path is about surrender and love?\n(Type 'Devotion')",
+            question: "Which path is about surrender and love?",
             answer: "devotion"
         }
     },
@@ -91,7 +91,7 @@ const levelData = [
             { x: 400, y: 420 }
         ],
         quiz: {
-            question: "LEVEL 6: What practice cultivates stillness and presence?\n(Type 'Meditation')",
+            question: "What practice cultivates stillness and presence?",
             answer: "meditation"
         }
     },
@@ -106,7 +106,7 @@ const levelData = [
             { x: 600, y: 360 }
         ],
         quiz: {
-            question: "LEVEL 7: What is the final freedom beyond becoming?\n(Type 'Liberation')",
+            question: "What is the final freedom beyond becoming?",
             answer: "liberation"
         }
     },

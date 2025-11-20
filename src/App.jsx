@@ -86,7 +86,6 @@ export default function App() {
           {collectedText.length === 0 && <p style={{color: '#777'}}>Collect yellow Vedas to reveal wisdom...</p>}
           {collectedText.map((item, i) => (
             <div key={i} style={{ marginBottom: '15px', background: '#333', padding: '10px', borderRadius: '5px' }}>
-              <strong style={{ color: '#ffd700' }}>{item.category}:</strong>
               <p style={{ margin: '5px 0', fontStyle: 'italic' }}>"{item.text}"</p>
             </div>
           ))}
