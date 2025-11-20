@@ -10,6 +10,7 @@ export default function App() {
   const [showQuiz, setShowQuiz] = useState(false);
   const [score, setScore] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
+  const [usedQuoteIndices, setUsedQuoteIndices] = useState([]);
 
   // Safety Check: Ensure we have data for the current level
   const currentLevelData = levelData[currentLevel];
@@ -22,13 +23,30 @@ export default function App() {
   const handleVedaCollection = () => {
     setScore(prev => prev + 1);
 
-    // Pick a random quote from the current level's category
+    // Pick a random quote from the current level's category (without repetition)
     if (vedaTexts && currentLevelData.vedaCategory) {
         const quotes = vedaTexts[currentLevelData.vedaCategory];
         
         if (quotes && quotes.length > 0) {
-            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            // Get available quotes (those not yet used)
+            const availableIndices = quotes
+                .map((_, idx) => idx)
+                .filter(idx => !usedQuoteIndices.includes(idx));
+            
+            let randomIndex;
+            
+            if (availableIndices.length > 0) {
+                // Pick from available quotes
+                randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+            } else {
+                // All quotes used, reset and pick any
+                randomIndex = Math.floor(Math.random() * quotes.length);
+                setUsedQuoteIndices([]);
+            }
+            
+            const randomQuote = quotes[randomIndex];
             setCollectedText(prev => [{ category: currentLevelData.vedaCategory, text: randomQuote }, ...prev]);
+            setUsedQuoteIndices(prev => [...prev, randomIndex]);
         }
     }
   };
@@ -49,6 +67,7 @@ export default function App() {
       setUserAnswer("");
       setCollectedText([]); 
       setScore(0);
+      setUsedQuoteIndices([]);
       
       // Advance Level
       if (currentLevel + 1 < levelData.length) {
