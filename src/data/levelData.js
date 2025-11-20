@@ -1,6 +1,7 @@
 const levelData = [ 
     {
         levelName: "Level 1",
+        vedaCategory: "Ignorance (Avidya)",
         backgroundColor: '#000000',
         totalVedas: 3,
         vedas: [
@@ -9,12 +10,13 @@ const levelData = [
             { x: 600, y: 450 }
         ],
         quiz: {
-            question: "LEVEL 1: What is the first stage of spiritual growth?\n(Type 'Ignorance')",
+            question: "What is the first stage of spiritual growth?",
             answer: "ignorance"
         }
     },
     {
-        levelName: 'Desire',
+        levelName: "Level 2",
+        vedaCategory: "Desire (Kama–Krodha)",
         backgroundColor: '#001f3f', 
         totalVedas: 4,
         vedas: [
@@ -24,12 +26,13 @@ const levelData = [
             { x: 700, y: 500 }
         ],
         quiz: {
-            question: "LEVEL 2: What follows Ignorance?\n(Type 'Desire')",
+            question: "What follows Ignorance?",
             answer: "desire"
         }
     },
     {
-        levelName: 'Ethics',
+        levelName: "Level 3",
+        vedaCategory: "Ethics (Dharma)",
         backgroundColor: '#0b3d91',
         totalVedas: 4,
         vedas: [
@@ -39,12 +42,13 @@ const levelData = [
             { x: 400, y: 480 }
         ],
         quiz: {
-            question: "LEVEL 3: Which principle guides right action?\n(Type 'Ethics')",
+            question: "Which principle guides right action?",
             answer: "ethics"
         }
     },
     {
-        levelName: 'Knowledge',
+        levelName: "Level 4",
+        vedaCategory: "Knowledge (Jnana)",
         backgroundColor: '#1e3d59',
         totalVedas: 4,
         vedas: [
@@ -54,12 +58,13 @@ const levelData = [
             { x: 720, y: 220 }
         ],
         quiz: {
-            question: "LEVEL 4: What opens the path of deep seeing?\n(Type 'Knowledge')",
+            question: "What opens the path of deep seeing?",
             answer: "knowledge"
         }
     },
     {
-        levelName: 'Devotion',
+        levelName: "Level 5",
+        vedaCategory: "Devotion (Bhakti)",
         backgroundColor: '#4b1f4f',
         totalVedas: 5,
         vedas: [
@@ -70,12 +75,13 @@ const levelData = [
             { x: 600, y: 460 }
         ],
         quiz: {
-            question: "LEVEL 5: Which path is about surrender and love?\n(Type 'Devotion')",
+            question: "Which path is about surrender and love?",
             answer: "devotion"
         }
     },
     {
-        levelName: 'Meditation',
+        levelName: "Level 6",
+        vedaCategory: "Meditation (Dhyana)",
         backgroundColor: '#013220',
         totalVedas: 4,
         vedas: [
@@ -85,12 +91,13 @@ const levelData = [
             { x: 400, y: 420 }
         ],
         quiz: {
-            question: "LEVEL 6: What practice cultivates stillness and presence?\n(Type 'Meditation')",
+            question: "What practice cultivates stillness and presence?",
             answer: "meditation"
         }
     },
     {
-        levelName: 'Liberation',
+        levelName: "Level 7",
+        vedaCategory: "Liberation (Moksha)",
         backgroundColor: '#8b5a2b',
         totalVedas: 3,
         vedas: [
@@ -99,7 +106,7 @@ const levelData = [
             { x: 600, y: 360 }
         ],
         quiz: {
-            question: "LEVEL 7: What is the final freedom beyond becoming?\n(Type 'Liberation')",
+            question: "What is the final freedom beyond becoming?",
             answer: "liberation"
         }
     },
