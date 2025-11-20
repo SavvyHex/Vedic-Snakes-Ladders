@@ -99,9 +99,9 @@ export default function App() {
       </div>
 
       {/* RIGHT SIDE: WISDOM SIDEBAR */}
-      <div style={{ flex: 1, marginLeft: '20px', color: 'white', borderLeft: '2px solid #333', paddingLeft: '20px' }}>
+      <div style={{ flex: 1, marginLeft: '20px', color: 'white', borderLeft: '2px solid #333', paddingLeft: '20px', minWidth: '400px', width: '400px' }}>
         <h3 style={{ borderBottom: '1px solid #ffd700' }}>Collected Wisdom</h3>
-        <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
+        <div style={{ maxHeight: '600px', overflowY: 'auto', wordWrap: 'break-word', overflow: 'hidden' }}>
           {collectedText.length === 0 && <p style={{color: '#777'}}>Collect yellow Vedas to reveal wisdom...</p>}
           {collectedText.map((item, i) => (
             <div key={i} style={{ marginBottom: '15px', background: '#333', padding: '10px', borderRadius: '5px' }}>
