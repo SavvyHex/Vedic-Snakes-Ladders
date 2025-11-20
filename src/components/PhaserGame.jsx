@@ -4,7 +4,7 @@ import levelData from '../data/levelData'
 
 // This component now only handles Physics and Inputs. 
 // It sends signals (props) up to App.jsx when things happen.
-export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate }) {
+export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive }) {
     const containerRef = useRef(null)
     const gameRef = useRef(null)
 
@@ -124,6 +124,17 @@ scene.physics.add.overlap(player, vedasGroup, (p, v) => {
             }
         }
     }, [currentLevel]) // Restart game when currentLevel changes
+
+    // Handle disabling keyboard input when quiz is active
+    useEffect(() => {
+        if (gameRef.current && gameRef.current.input && gameRef.current.input.keyboard) {
+            if (isQuizActive) {
+                gameRef.current.input.keyboard.enabled = false;
+            } else {
+                gameRef.current.input.keyboard.enabled = true;
+            }
+        }
+    }, [isQuizActive])
 
     return <div ref={containerRef} style={{ width: '800px', height: '600px' }} />
 }

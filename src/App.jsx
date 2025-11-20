@@ -76,6 +76,7 @@ export default function App() {
           currentLevel={currentLevel}
           onCollectVeda={handleVedaCollection}
           onReachGate={handleReachGate}
+          isQuizActive={showQuiz}
         />
       </div>
 
