@@ -2,155 +2,128 @@ import React, { useEffect, useRef } from 'react'
 import Phaser from 'phaser'
 import levelData from '../data/levelData'
 
-export default function PhaserGame() {
+// This component now only handles Physics and Inputs. 
+// It sends signals (props) up to App.jsx when things happen.
+export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate }) {
     const containerRef = useRef(null)
     const gameRef = useRef(null)
 
     useEffect(() => {
         if (!containerRef.current) return
 
-        // ---GLOBAL-LIKE VARIABLES INSIDE SCENE---
+        // Cleanup old game instance strictly before creating a new one
+        if (gameRef.current) {
+            gameRef.current.destroy(true);
+        }
+
+        // --- VARIABLES ---
         let player
         let keys
         let cursors
-        let vedas
-        let scoreText
-        let score = 0
-        let gate
-        let currentLevelIndex = 0
+        let vedasGroup 
         let totalVedas
+        let score = 0 // Internal score to know when to open gate
 
         const config = {
             type: Phaser.AUTO,
             width: 800,
             height: 600,
             parent: containerRef.current,
-            backgroundColor: levelData[0].backgroundColor,
+            backgroundColor: levelData[currentLevel]?.backgroundColor || '#000',
             physics: {
                 default: 'arcade',
                 arcade: { debug: false }
             },
             scene: {
-                preload: function () { },
                 create: create,
                 update: update
             }
         }
 
         function create() {
-            score = 0
+            const scene = this; 
+            score = 0;
 
-            const level = levelData[currentLevelIndex]
+            // Safety Check: If level data is missing, stop here to prevent crash
+            const level = levelData[currentLevel];
+            if (!level) {
+                console.error("Level data missing for index:", currentLevel);
+                return;
+            }
+            
             totalVedas = level.totalVedas
 
-            player = this.add.rectangle(100, 100, 30, 30, 0x00ff00)
-            this.physics.add.existing(player)
+            // --- PLAYER ---
+            player = scene.add.rectangle(100, 100, 30, 30, 0x00ff00)
+            scene.physics.add.existing(player)
             player.body.setCollideWorldBounds(true)
 
-            // create vedas as simple rectangles and add static physics bodies
-            vedas = []
-            level.vedas.forEach(vedaPos => {
-                const rect = this.add.rectangle(vedaPos.x, vedaPos.y, 20, 20, 0xffff00)
-                this.physics.add.existing(rect, true) // true -> static body
-                vedas.push(rect)
+            // --- VEDAS ---
+            vedasGroup = scene.physics.add.staticGroup();
+            level.vedas.forEach((vedaPos, index) => {
+                const rect = scene.add.rectangle(vedaPos.x, vedaPos.y, 20, 20, 0xffff00)
+                // We store the ID so we can tell React exactly which veda was taken
+                rect.setData('id', index); 
+                vedasGroup.add(scene.physics.add.existing(rect, true));
             })
 
-            scoreText = this.add.text(10, 10, 'Vedas Collected: 0', {
-                font: '24px Arial',
-                fill: '#FFFFFF'
-            })
+            // --- GATE ---
+            const gate = scene.add.rectangle(750, 275, 20, 50, 0xff0000)
+            scene.physics.add.existing(gate, true)
 
-            gate = this.add.rectangle(750, 275, 20, 50, 0xff0000)
-            this.physics.add.existing(gate, true)
+            // --- CONTROLS ---
+            keys = scene.input.keyboard.addKeys('W,A,S,D')
+            cursors = scene.input.keyboard.createCursorKeys()
 
-            keys = this.input.keyboard.addKeys('W,A,S,D')
-            // also create cursor keys (arrow keys)
-            cursors = this.input.keyboard.createCursorKeys()
+            // --- COLLISIONS ---
+            // 1. Collect Veda
+// 1. Collect Veda
+scene.physics.add.overlap(player, vedasGroup, (p, v) => {
+    // --- THIS IS THE FIX ---
+    // Old crashy code was: v.disableBody(true, true);
+    
+    // New working code:
+    v.body.enable = false; // 1. Turn off physics so you can't hit it again
+    v.setVisible(false);   // 2. Make it invisible
+    // -----------------------
 
-            // register overlap with an array of GameObjects
-            this.physics.add.overlap(player, vedas, collectVeda, null, this)
-            this.physics.add.overlap(player, gate, touchGate, null, this)
+    score++;
+    
+    // Signal React: "User collected a veda!"
+    if(onCollectVeda) onCollectVeda(v.getData('id'));
+}, null, scene)
 
-            this.cameras.main.setBackgroundColor(level.backgroundColor)
+            // 2. Hit Gate
+            scene.physics.add.collider(player, gate, () => {
+                if (score >= totalVedas) {
+                    scene.physics.pause(); // Stop the game
+                    // Signal React: "User finished level!"
+                    if(onReachGate) onReachGate();
+                }
+            }, null, scene)
         }
 
         function update() {
             if (!player || !player.body) return
             player.body.setVelocity(0)
-            // Horizontal movement: A/D or Left/Right
-            if (keys.A.isDown || (cursors && cursors.left.isDown)) {
-                player.body.setVelocityX(-200)
-            } else if (keys.D.isDown || (cursors && cursors.right.isDown)) {
-                player.body.setVelocityX(200)
-            }
 
-            // Vertical movement: W/S or Up/Down
-            if (keys.W.isDown || (cursors && cursors.up.isDown)) {
-                player.body.setVelocityY(-200)
-            } else if (keys.S.isDown || (cursors && cursors.down.isDown)) {
-                player.body.setVelocityY(200)
-            }
-        }
+            // Movement Logic
+            if (keys.A.isDown || (cursors && cursors.left.isDown)) player.body.setVelocityX(-200)
+            else if (keys.D.isDown || (cursors && cursors.right.isDown)) player.body.setVelocityX(200)
 
-        function collectVeda(playerObj, veda) {
-            // veda is a GameObject with a static body; hide and disable its body
-            if (veda.body) {
-                veda.body.enable = false
-            }
-            veda.setVisible(false)
-
-            score++
-            scoreText.setText('Vedas Collected: ' + score)
-
-            if (score === totalVedas) {
-                gate.setFillStyle(0x00ff00)
-            }
-        }
-
-        function touchGate(playerObj, gateObj) {
-            const level = levelData[currentLevelIndex]
-            if (score !== level.totalVedas) return
-
-            this.physics.pause()
-            player.body.setVelocity(0)
-
-            const answer = window.prompt(level.quiz.question)
-            if (answer && answer.toLowerCase().trim() === level.quiz.answer) {
-                window.alert('Correct! You have understood this realm.')
-                currentLevelIndex++
-                if (currentLevelIndex >= levelData.length) {
-                    this.add
-                        .text(400, 300, 'YOU HAVE REACHED LIBERATION!', {
-                            font: '36px Arial',
-                            fill: '#FFFF00'
-                        })
-                        .setOrigin(0.5)
-                    return
-                }
-                this.scene.restart()
-            } else {
-                window.alert("Incorrect. You must learn this realm's lesson again.")
-                this.scene.restart()
-            }
+            if (keys.W.isDown || (cursors && cursors.up.isDown)) player.body.setVelocityY(-200)
+            else if (keys.S.isDown || (cursors && cursors.down.isDown)) player.body.setVelocityY(200)
         }
 
         gameRef.current = new Phaser.Game(config)
 
         return () => {
             if (gameRef.current) {
-                try {
-                    gameRef.current.destroy(true)
-                } catch (e) {
-                    // ignore
-                }
+                gameRef.current.destroy(true)
                 gameRef.current = null
             }
         }
-    }, [])
+    }, [currentLevel]) // Restart game when currentLevel changes
 
-    return (
-        <div className="phaser-container">
-            <div ref={containerRef} />
-        </div>
-    )
+    return <div ref={containerRef} style={{ width: '800px', height: '600px' }} />
 }

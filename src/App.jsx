@@ -1,11 +1,128 @@
-import React from 'react'
-import PhaserGame from './components/PhaserGame'
+import React, { useState } from 'react';
+import PhaserGame from './components/PhaserGame';
+import levelData from './data/levelData';
+import vedaTexts from './data/vedas.json'; // Ensure this file exists
+import './index.css'; 
 
 export default function App() {
+  const [currentLevel, setCurrentLevel] = useState(0);
+  const [collectedText, setCollectedText] = useState([]); 
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [score, setScore] = useState(0);
+  const [userAnswer, setUserAnswer] = useState("");
+
+  // Safety Check: Ensure we have data for the current level
+  const currentLevelData = levelData[currentLevel];
+
+  if (!currentLevelData) {
+      return <div style={{color: 'white'}}>Error: No data for level {currentLevel}</div>;
+  }
+
+  // --- HANDLERS ---
+  const handleVedaCollection = () => {
+    setScore(prev => prev + 1);
+
+    // Pick a random quote to display in the sidebar
+    if (vedaTexts) {
+        const categories = Object.keys(vedaTexts); 
+        if (categories.length > 0) {
+            const randomCat = categories[Math.floor(Math.random() * categories.length)];
+            const quotes = vedaTexts[randomCat];
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            setCollectedText(prev => [{ category: randomCat, text: randomQuote }, ...prev]);
+        }
+    }
+  };
+
+  const handleReachGate = () => {
+    setShowQuiz(true);
+  };
+
+  const handleSubmitAnswer = () => {
+    // Compare answer (case-insensitive)
+    const correctAnswer = currentLevelData.quiz.answer;
+    
+    if (userAnswer.trim().toLowerCase() === correctAnswer.toLowerCase()) {
+      alert("Correct! Ascending to the next realm...");
+      
+      // Reset State for Next Level
+      setShowQuiz(false);
+      setUserAnswer("");
+      setCollectedText([]); 
+      setScore(0);
+      
+      // Advance Level
+      if (currentLevel + 1 < levelData.length) {
+          setCurrentLevel(prev => prev + 1);
+      } else {
+          alert("You have reached Ultimate Liberation!");
+          setCurrentLevel(0); // Loop back to start
+      }
+    } else {
+      alert("Incorrect. Seek the answer within.");
+    }
+  };
+
   return (
-    <div className="app-root">
-      <h1>Vedic Snakes & Ladders</h1>
-      <PhaserGame />
+    <div style={{ display: 'flex', padding: '20px', backgroundColor: '#1a1a1a', minHeight: '100vh' }}>
+      
+      {/* LEFT SIDE: GAME AREA */}
+      <div style={{ flex: 2 }}>
+        <h2 style={{ color: '#ffd700', fontFamily: 'monospace' }}>
+          {currentLevelData.levelName} - Vedas: {score}/{currentLevelData.totalVedas}
+        </h2>
+        {/* We pass the level and handlers down to the game */}
+        <PhaserGame 
+          currentLevel={currentLevel}
+          onCollectVeda={handleVedaCollection}
+          onReachGate={handleReachGate}
+        />
+      </div>
+
+      {/* RIGHT SIDE: WISDOM SIDEBAR */}
+      <div style={{ flex: 1, marginLeft: '20px', color: 'white', borderLeft: '2px solid #333', paddingLeft: '20px' }}>
+        <h3 style={{ borderBottom: '1px solid #ffd700' }}>Collected Wisdom</h3>
+        <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
+          {collectedText.length === 0 && <p style={{color: '#777'}}>Collect yellow Vedas to reveal wisdom...</p>}
+          {collectedText.map((item, i) => (
+            <div key={i} style={{ marginBottom: '15px', background: '#333', padding: '10px', borderRadius: '5px' }}>
+              <strong style={{ color: '#ffd700' }}>{item.category}:</strong>
+              <p style={{ margin: '5px 0', fontStyle: 'italic' }}>"{item.text}"</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* MODAL: QUIZ OVERLAY */}
+      {showQuiz && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+          backgroundColor: 'rgba(0,0,0,0.9)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000
+        }}>
+          <div style={{ background: '#222', padding: '40px', border: '2px solid #ffd700', borderRadius: '10px', textAlign: 'center', color: 'white', width: '400px' }}>
+            <h2>Gatekeeper's Test</h2>
+            <p style={{ whiteSpace: 'pre-wrap', fontSize: '1.2em', marginBottom: '20px' }}>
+                {currentLevelData.quiz.question}
+            </p>
+            
+            <input 
+                type="text" 
+                value={userAnswer}
+                onChange={(e) => setUserAnswer(e.target.value)}
+                placeholder="Type your answer..."
+                style={{ padding: '10px', width: '80%', marginBottom: '20px', fontSize: '1rem' }}
+            />
+            <br />
+            
+            <button 
+                onClick={handleSubmitAnswer}
+                style={{ padding: '10px 30px', cursor: 'pointer', fontSize: '1rem', background: '#ffd700', color: '#000', border: 'none', fontWeight: 'bold' }}
+            >
+                Submit
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
