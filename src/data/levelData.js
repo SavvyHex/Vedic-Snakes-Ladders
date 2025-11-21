@@ -1,4 +1,4 @@
-const levelData = [ 
+const levelData = [
     {
         levelName: "Level 1",
         vedaCategory: "Ignorance (Avidya)",
@@ -17,7 +17,7 @@ const levelData = [
     {
         levelName: "Level 2",
         vedaCategory: "Desire (Kama–Krodha)",
-        backgroundColor: '#001f3f', 
+        backgroundColor: '#001f3f',
         totalVedas: 4,
         vedas: [
             { x: 100, y: 100 },

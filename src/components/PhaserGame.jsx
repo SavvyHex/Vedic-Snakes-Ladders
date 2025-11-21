@@ -20,7 +20,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
         let player
         let keys
         let cursors
-        let vedasGroup 
+        let vedasGroup
         let totalVedas
         let score = 0 // Internal score to know when to open gate
 
@@ -41,7 +41,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
         }
 
         function create() {
-            const scene = this; 
+            const scene = this;
             score = 0;
 
             // Safety Check: If level data is missing, stop here to prevent crash
@@ -50,7 +50,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 console.error("Level data missing for index:", currentLevel);
                 return;
             }
-            
+
             totalVedas = level.totalVedas
 
             // --- PLAYER ---
@@ -63,7 +63,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             level.vedas.forEach((vedaPos, index) => {
                 const rect = scene.add.rectangle(vedaPos.x, vedaPos.y, 20, 20, 0xffff00)
                 // We store the ID so we can tell React exactly which veda was taken
-                rect.setData('id', index); 
+                rect.setData('id', index);
                 vedasGroup.add(scene.physics.add.existing(rect, true));
             })
 
@@ -77,28 +77,28 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
 
             // --- COLLISIONS ---
             // 1. Collect Veda
-// 1. Collect Veda
-scene.physics.add.overlap(player, vedasGroup, (p, v) => {
-    // --- THIS IS THE FIX ---
-    // Old crashy code was: v.disableBody(true, true);
-    
-    // New working code:
-    v.body.enable = false; // 1. Turn off physics so you can't hit it again
-    v.setVisible(false);   // 2. Make it invisible
-    // -----------------------
+            // 1. Collect Veda
+            scene.physics.add.overlap(player, vedasGroup, (p, v) => {
+                // --- THIS IS THE FIX ---
+                // Old crashy code was: v.disableBody(true, true);
 
-    score++;
-    
-    // Signal React: "User collected a veda!"
-    if(onCollectVeda) onCollectVeda(v.getData('id'));
-}, null, scene)
+                // New working code:
+                v.body.enable = false; // 1. Turn off physics so you can't hit it again
+                v.setVisible(false);   // 2. Make it invisible
+                // -----------------------
+
+                score++;
+
+                // Signal React: "User collected a veda!"
+                if (onCollectVeda) onCollectVeda(v.getData('id'));
+            }, null, scene)
 
             // 2. Hit Gate
             scene.physics.add.collider(player, gate, () => {
                 if (score >= totalVedas) {
                     scene.physics.pause(); // Stop the game
                     // Signal React: "User finished level!"
-                    if(onReachGate) onReachGate();
+                    if (onReachGate) onReachGate();
                 }
             }, null, scene)
         }
