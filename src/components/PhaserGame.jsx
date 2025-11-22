@@ -4,7 +4,7 @@ import levelData from '../data/levelData'
 
 // This component now only handles Physics and Inputs. 
 // It sends signals (props) up to App.jsx when things happen.
-export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive }) {
+export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive, restartKey }) {
     const containerRef = useRef(null)
     const gameRef = useRef(null)
 
@@ -23,6 +23,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
         let vedasGroup 
         let totalVedas
         let score = 0 // Internal score to know when to open gate
+        let vedaRects = [] // Store references to reveal them sequentially
 
         const config = {
             type: Phaser.AUTO,
@@ -60,11 +61,20 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
 
             // --- VEDAS ---
             vedasGroup = scene.physics.add.staticGroup();
+            vedaRects = []; // Reset array for new level
+            
             level.vedas.forEach((vedaPos, index) => {
                 const rect = scene.add.rectangle(vedaPos.x, vedaPos.y, 20, 20, 0xffff00)
                 // We store the ID so we can tell React exactly which veda was taken
-                rect.setData('id', index); 
+                rect.setData('id', index);
+                // Initially hide all vedas except the first one
+                if (index === 0) {
+                    rect.setVisible(true);
+                } else {
+                    rect.setVisible(false);
+                }
                 vedasGroup.add(scene.physics.add.existing(rect, true));
+                vedaRects.push(rect);
             })
 
             // --- GATE ---
@@ -77,21 +87,25 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
 
             // --- COLLISIONS ---
             // 1. Collect Veda
-// 1. Collect Veda
-scene.physics.add.overlap(player, vedasGroup, (p, v) => {
-    // --- THIS IS THE FIX ---
-    // Old crashy code was: v.disableBody(true, true);
-    
-    // New working code:
-    v.body.enable = false; // 1. Turn off physics so you can't hit it again
-    v.setVisible(false);   // 2. Make it invisible
-    // -----------------------
+            scene.physics.add.overlap(player, vedasGroup, (p, v) => {
+                // --- THIS IS THE FIX ---
+                // Old crashy code was: v.disableBody(true, true);
+                
+                // New working code:
+                v.body.enable = false; // 1. Turn off physics so you can't hit it again
+                v.setVisible(false);   // 2. Make it invisible
+                // -----------------------
 
-    score++;
-    
-    // Signal React: "User collected a veda!"
-    if(onCollectVeda) onCollectVeda(v.getData('id'));
-}, null, scene)
+                score++;
+                
+                // Reveal the next veda (if there is one)
+                if (score < vedaRects.length) {
+                    vedaRects[score].setVisible(true);
+                }
+                
+                // Signal React: "User collected a veda!"
+                if(onCollectVeda) onCollectVeda(v.getData('id'));
+            }, null, scene)
 
             // 2. Hit Gate
             scene.physics.add.collider(player, gate, () => {
@@ -123,7 +137,7 @@ scene.physics.add.overlap(player, vedasGroup, (p, v) => {
                 gameRef.current = null
             }
         }
-    }, [currentLevel]) // Restart game when currentLevel changes
+    }, [currentLevel, restartKey]) // Restart game when currentLevel or restartKey changes
 
     // Handle disabling keyboard input when quiz is active
     useEffect(() => {
