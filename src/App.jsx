@@ -11,6 +11,7 @@ export default function App() {
   const [score, setScore] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [usedQuoteIndices, setUsedQuoteIndices] = useState([]);
+  const [restartKey, setRestartKey] = useState(0); // Key to force game restart
 
   // Safety Check: Ensure we have data for the current level
   const currentLevelData = levelData[currentLevel];
@@ -28,7 +29,7 @@ export default function App() {
         const quotes = vedaTexts[currentLevelData.vedaCategory];
         
         if (quotes && quotes.length > 0) {
-            // Get available quotes (those not yet used)
+            // Get available quotes (those not yet used in this session)
             const availableIndices = quotes
                 .map((_, idx) => idx)
                 .filter(idx => !usedQuoteIndices.includes(idx));
@@ -36,12 +37,12 @@ export default function App() {
             let randomIndex;
             
             if (availableIndices.length > 0) {
-                // Pick from available quotes
+                // Pick from available quotes that haven't been used yet
                 randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
             } else {
-                // All quotes used, reset and pick any
+                // All quotes used, reset and pick any (shouldn't happen often)
                 randomIndex = Math.floor(Math.random() * quotes.length);
-                setUsedQuoteIndices([]);
+                setUsedQuoteIndices([randomIndex]);
             }
             
             const randomQuote = quotes[randomIndex];
@@ -81,7 +82,7 @@ export default function App() {
       setScore(0);
       setUsedQuoteIndices([]);
       
-      // Advance Level
+      // Advance Level (game will restart automatically when currentLevel changes)
       if (currentLevel + 1 < levelData.length) {
           setCurrentLevel(prev => prev + 1);
       } else {
@@ -89,7 +90,17 @@ export default function App() {
           setCurrentLevel(0); // Loop back to start
       }
     } else {
-      alert("Incorrect. Seek the answer within.");
+      alert("Incorrect. Seek the answer within. Restarting the level...");
+      
+      // Reset all state for the same level
+      setShowQuiz(false);
+      setUserAnswer("");
+      setCollectedText([]); 
+      setScore(0);
+      setUsedQuoteIndices([]);
+      
+      // Force game restart by incrementing restartKey
+      setRestartKey(prev => prev + 1);
     }
   };
 
@@ -107,6 +118,7 @@ export default function App() {
           onCollectVeda={handleVedaCollection}
           onReachGate={handleReachGate}
           isQuizActive={showQuiz}
+          restartKey={restartKey}
         />
       </div>
 
