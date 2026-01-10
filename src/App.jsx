@@ -11,6 +11,7 @@ export default function App() {
   const [restartKey, setRestartKey] = useState(0); // Key to force game restart
   const [quizQuestions, setQuizQuestions] = useState({}); // All quiz questions loaded from file
   const [answeredBooks, setAnsweredBooks] = useState([]); // Track which books have been answered correctly
+  const [collectedBooks, setCollectedBooks] = useState([]); // Track which books have been collected (touched)
   const [currentBookIndex, setCurrentBookIndex] = useState(null); // Which book was just collected
   const [currentQuestion, setCurrentQuestion] = useState(null); // Current question being asked
   const [penaltyBooks, setPenaltyBooks] = useState(0); // Extra books needed due to wrong answers
@@ -19,6 +20,7 @@ export default function App() {
   // Use refs to store the latest values for use in Phaser callbacks
   const quizQuestionsRef = useRef({});
   const answeredBooksRef = useRef([]);
+  const collectedBooksRef = useRef([]);
   const currentLevelRef = useRef(currentLevel);
   const usedQuestionIndicesRef = useRef([]);
 
@@ -30,6 +32,10 @@ export default function App() {
   useEffect(() => {
     answeredBooksRef.current = answeredBooks;
   }, [answeredBooks]);
+
+  useEffect(() => {
+    collectedBooksRef.current = collectedBooks;
+  }, [collectedBooks]);
 
   useEffect(() => {
     currentLevelRef.current = currentLevel;
@@ -71,6 +77,32 @@ export default function App() {
       return <div style={{color: 'white'}}>Error: No data for level {currentLevel}</div>;
   }
 
+  // Generate dynamic veda positions including penalty books
+  const getVedaPositions = () => {
+    const baseVedas = currentLevelData.vedas;
+    const totalRequired = currentLevelData.totalVedas + penaltyBooks;
+    
+    // If we need more vedas than we have, generate additional positions
+    if (totalRequired > baseVedas.length) {
+      const additionalVedas = [];
+      const extraNeeded = totalRequired - baseVedas.length;
+      
+      // Generate random positions for penalty books
+      for (let i = 0; i < extraNeeded; i++) {
+        additionalVedas.push({
+          x: 100 + Math.random() * 600,  // Random x between 100-700
+          y: 100 + Math.random() * 400   // Random y between 100-500
+        });
+      }
+      
+      return [...baseVedas, ...additionalVedas];
+    }
+    
+    return baseVedas;
+  };
+
+  const vedaPositions = getVedaPositions();
+
   // --- HANDLERS ---
   const handleVedaCollection = useCallback((bookIndex) => {
     console.log('Book collected:', bookIndex);
@@ -89,11 +121,14 @@ export default function App() {
       return;
     }
     
-    // Check if this book has already been answered correctly
-    if (answeredBooksRef.current.includes(bookIndex)) {
-      console.log('Book already answered, skipping');
-      return; // Already answered, don't show quiz again 
+    // Check if this book has already been collected (touched)
+    if (collectedBooksRef.current.includes(bookIndex)) {
+      console.log('Book already collected, skipping');
+      return; // Already collected, don't show quiz again 
     }
+
+    // Mark as collected immediately
+    setCollectedBooks(prev => [...prev, bookIndex]);
 
     // Get a question for this book (convert level to string for key access)
     const levelKey = String(currentLevelRef.current);
@@ -132,9 +167,9 @@ export default function App() {
 
   const handleReachGate = () => {
     const requiredBooks = currentLevelData.totalVedas + penaltyBooks;
-    // Only allow through gate if all books have been answered (including penalties)
+    // Only allow through gate if enough books have been answered correctly (including penalties)
     if (answeredBooks.length >= requiredBooks) {
-      // All books answered, proceed to next level
+      // All books answered correctly, proceed to next level
       advanceToNextLevel();
     }
   };
@@ -148,7 +183,7 @@ export default function App() {
     if (isCorrect) {
       alert("Correct! Continue your journey...");
       
-      // Mark this book as answered
+      // Mark this book as answered correctly
       setAnsweredBooks(prev => [...prev, currentBookIndex]);
       setScore(prev => prev + 1);
       
@@ -170,12 +205,12 @@ export default function App() {
       const correctOption = currentQuestion.options.find(opt => opt.letter === currentQuestion.answer);
       const correctText = correctOption ? `${currentQuestion.answer}) ${correctOption.text}` : currentQuestion.answer;
       
-      alert(`Incorrect! The correct answer is: ${correctText}\n\nPenalty: You must collect one additional book.`);
+      alert(`Incorrect! The correct answer is: ${correctText}\n\nPenalty: You must collect and answer one additional book correctly.`);
       
       // Add penalty book
       setPenaltyBooks(prev => prev + 1);
       
-      // Close quiz - player needs to find another book
+      // Close quiz - next book will appear automatically
       setShowQuiz(false);
       setCurrentQuestion(null);
       setCurrentBookIndex(null);
@@ -189,6 +224,7 @@ export default function App() {
     setShowQuiz(false);
     setScore(0);
     setAnsweredBooks([]);
+    setCollectedBooks([]);
     setCurrentQuestion(null);
     setCurrentBookIndex(null);
     setPenaltyBooks(0);
@@ -211,7 +247,7 @@ export default function App() {
       {/* GAME AREA */}
       <div>
         <h2 style={{ color: '#ffd700', fontFamily: 'monospace' }}>
-          {currentLevelData.levelName} - Books Answered: {answeredBooks.length}/{requiredBooks}
+          {currentLevelData.levelName} - Books: {collectedBooks.length} collected | Correct: {answeredBooks.length}/{requiredBooks}
           {penaltyBooks > 0 && <span style={{ color: '#ff6b6b', marginLeft: '10px' }}>(+{penaltyBooks} penalty)</span>}
         </h2>
         {/* We pass the level and handlers down to the game */}
@@ -221,6 +257,9 @@ export default function App() {
           onReachGate={handleReachGate}
           isQuizActive={showQuiz}
           restartKey={restartKey}
+          answeredBooksCount={collectedBooks.length}
+          vedaPositions={vedaPositions}
+          totalVedas={currentLevelData.totalVedas + penaltyBooks}
         />
       </div>
 
@@ -233,7 +272,7 @@ export default function App() {
           <div style={{ background: '#222', padding: '40px', border: '2px solid #ffd700', borderRadius: '10px', textAlign: 'left', color: 'white', maxWidth: '600px', width: '90%' }}>
             <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Book of Wisdom Question</h2>
             <p style={{ fontSize: '1.1em', marginBottom: '20px', lineHeight: '1.5' }}>
-                <strong>Q{currentQuestion.number}:</strong> {currentQuestion.question}
+                {currentQuestion.question}
             </p>
             
             <div style={{ marginBottom: '20px' }}>
