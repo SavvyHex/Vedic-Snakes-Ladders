@@ -205,6 +205,41 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
         }
     }, [answeredBooksCount]);
 
+    // Dynamically add new books when vedaPositions increases (penalty books)
+    useEffect(() => {
+        if (gameRef.current && gameRef.current.scene && gameRef.current.scene.scenes[0]) {
+            const scene = gameRef.current.scene.scenes[0];
+            const books = scene.children.list.filter(child => child.texture && child.texture.key === 'book');
+            
+            // If we need more books than currently exist, add them
+            if (vedaPositions && vedaPositions.length > books.length) {
+                const vedasGroup = scene.physics.world.staticBodies.entries.find(body => {
+                    return body.gameObject && body.gameObject.texture && body.gameObject.texture.key === 'book';
+                })?.gameObject?.parentContainer || scene.children.list.find(child => child.type === 'Group');
+                
+                // Add the new books
+                for (let i = books.length; i < vedaPositions.length; i++) {
+                    const vedaPos = vedaPositions[i];
+                    const book = scene.add.sprite(vedaPos.x, vedaPos.y, 'book');
+                    book.setScale(1.0);
+                    book.setData('id', i);
+                    book.setVisible(i === answeredBooksCount); // Show only if it's the next one
+                    scene.physics.add.existing(book, true);
+                    
+                    // Add overlap detection for the new book
+                    const player = scene.children.list.find(child => child.anims && child.anims.currentAnim);
+                    if (player) {
+                        scene.physics.add.overlap(player, book, (p, v) => {
+                            v.body.enable = false;
+                            v.setVisible(false);
+                            if(onCollectVeda) onCollectVeda(v.getData('id'));
+                        }, null, scene);
+                    }
+                }
+            }
+        }
+    }, [vedaPositions, answeredBooksCount, onCollectVeda]);
+
     // Handle disabling keyboard input and pausing physics when quiz is active
     useEffect(() => {
         if (gameRef.current && gameRef.current.scene && gameRef.current.scene.scenes[0]) {
