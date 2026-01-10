@@ -66,7 +66,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
 
             // --- PLAYER ---
             player = scene.add.sprite(100, 100, 'walking')
-            player.setScale(0.5) // Adjust scale if needed
+            player.setScale(1.0) // Adjust scale if needed
             scene.physics.add.existing(player)
             player.body.setCollideWorldBounds(true)
 
