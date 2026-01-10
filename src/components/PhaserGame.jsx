@@ -31,6 +31,9 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             height: 600,
             parent: containerRef.current,
             backgroundColor: levelData[currentLevel]?.backgroundColor || '#000',
+            render: {
+                pixelArt: true
+            },
             physics: {
                 default: 'arcade',
                 arcade: { debug: false }
