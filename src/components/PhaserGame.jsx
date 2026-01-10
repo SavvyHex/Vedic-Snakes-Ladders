@@ -31,14 +31,34 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             height: 600,
             parent: containerRef.current,
             backgroundColor: levelData[currentLevel]?.backgroundColor || '#000',
+            render: {
+                pixelArt: true
+            },
             physics: {
                 default: 'arcade',
                 arcade: { debug: false }
             },
             scene: {
+                preload: preload,
                 create: create,
                 update: update
             }
+        }
+
+        function preload() {
+            const scene = this;
+            // Load the walking spritesheet
+            scene.load.spritesheet('walking', '/assets/walking.png', {
+                frameWidth: 64,
+                frameHeight: 64
+            });
+            // Load the idle spritesheet
+            scene.load.spritesheet('idle', '/assets/idle.png', {
+                frameWidth: 64,
+                frameHeight: 64
+            });
+            // Load the book sprite
+            scene.load.image('book', '/assets/book.png');
         }
 
         function create() {
@@ -55,26 +75,44 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             totalVedas = level.totalVedas
 
             // --- PLAYER ---
-            player = scene.add.rectangle(100, 100, 30, 30, 0x00ff00)
+            player = scene.add.sprite(100, 100, 'walking')
+            player.setScale(1.0) // Adjust scale if needed
             scene.physics.add.existing(player)
             player.body.setCollideWorldBounds(true)
+
+            // Create walking animation
+            scene.anims.create({
+                key: 'walk',
+                frames: scene.anims.generateFrameNumbers('walking', { start: 0, end: 3 }),
+                frameRate: 10,
+                repeat: -1 // Loop indefinitely
+            });
+
+            // Create idle animation
+            scene.anims.create({
+                key: 'idle',
+                frames: scene.anims.generateFrameNumbers('idle', { start: 0, end: 3 }),
+                frameRate: 8,
+                repeat: -1 // Loop indefinitely
+            });
 
             // --- VEDAS ---
             vedasGroup = scene.physics.add.staticGroup();
             vedaRects = []; // Reset array for new level
             
             level.vedas.forEach((vedaPos, index) => {
-                const rect = scene.add.rectangle(vedaPos.x, vedaPos.y, 20, 20, 0xffff00)
+                const book = scene.add.sprite(vedaPos.x, vedaPos.y, 'book')
+                book.setScale(1.0);
                 // We store the ID so we can tell React exactly which veda was taken
-                rect.setData('id', index);
+                book.setData('id', index);
                 // Initially hide all vedas except the first one
                 if (index === 0) {
-                    rect.setVisible(true);
+                    book.setVisible(true);
                 } else {
-                    rect.setVisible(false);
+                    book.setVisible(false);
                 }
-                vedasGroup.add(scene.physics.add.existing(rect, true));
-                vedaRects.push(rect);
+                vedasGroup.add(scene.physics.add.existing(book, true));
+                vedaRects.push(book);
             })
 
             // --- GATE ---
@@ -121,12 +159,35 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             if (!player || !player.body) return
             player.body.setVelocity(0)
 
-            // Movement Logic
-            if (keys.A.isDown || (cursors && cursors.left.isDown)) player.body.setVelocityX(-200)
-            else if (keys.D.isDown || (cursors && cursors.right.isDown)) player.body.setVelocityX(200)
+            let isMoving = false;
 
-            if (keys.W.isDown || (cursors && cursors.up.isDown)) player.body.setVelocityY(-200)
-            else if (keys.S.isDown || (cursors && cursors.down.isDown)) player.body.setVelocityY(200)
+            // Movement Logic
+            if (keys.A.isDown || (cursors && cursors.left.isDown)) {
+                player.body.setVelocityX(-200)
+                player.setFlipX(true);
+                isMoving = true;
+            }
+            else if (keys.D.isDown || (cursors && cursors.right.isDown)) {
+                player.body.setVelocityX(200)
+                player.setFlipX(false);
+                isMoving = true;
+            }
+
+            if (keys.W.isDown || (cursors && cursors.up.isDown)) {
+                player.body.setVelocityY(-200)
+                isMoving = true;
+            }
+            else if (keys.S.isDown || (cursors && cursors.down.isDown)) {
+                player.body.setVelocityY(200)
+                isMoving = true;
+            }
+
+            // Play or stop walking animation
+            if (isMoving) {
+                player.anims.play('walk', true);
+            } else {
+                player.anims.play('idle', true);
+            }
         }
 
         gameRef.current = new Phaser.Game(config)
