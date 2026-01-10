@@ -66,9 +66,9 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             score = 0;
 
             // Safety Check: If level data is missing, stop here to prevent crash
-            const level = levelData[currentLevel];
+            const level = levelData[currentLevel - 1]; // levelData is 0-indexed array
             if (!level) {
-                console.error("Level data missing for index:", currentLevel);
+                console.error("Level data missing for level:", currentLevel);
                 return;
             }
             
@@ -105,12 +105,8 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 book.setScale(1.0);
                 // We store the ID so we can tell React exactly which veda was taken
                 book.setData('id', index);
-                // Initially hide all vedas except the first one
-                if (index === 0) {
-                    book.setVisible(true);
-                } else {
-                    book.setVisible(false);
-                }
+                // All books are visible from the start
+                book.setVisible(true);
                 vedasGroup.add(scene.physics.add.existing(book, true));
                 vedaRects.push(book);
             })
@@ -126,22 +122,13 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             // --- COLLISIONS ---
             // 1. Collect Veda
             scene.physics.add.overlap(player, vedasGroup, (p, v) => {
-                // --- THIS IS THE FIX ---
-                // Old crashy code was: v.disableBody(true, true);
-                
-                // New working code:
+                // Disable and hide the book
                 v.body.enable = false; // 1. Turn off physics so you can't hit it again
                 v.setVisible(false);   // 2. Make it invisible
-                // -----------------------
 
                 score++;
                 
-                // Reveal the next veda (if there is one)
-                if (score < vedaRects.length) {
-                    vedaRects[score].setVisible(true);
-                }
-                
-                // Signal React: "User collected a veda!"
+                // Signal React: "User collected a veda!" with the book index
                 if(onCollectVeda) onCollectVeda(v.getData('id'));
             }, null, scene)
 
@@ -200,13 +187,29 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
         }
     }, [currentLevel, restartKey]) // Restart game when currentLevel or restartKey changes
 
-    // Handle disabling keyboard input when quiz is active
+    // Handle disabling keyboard input and pausing physics when quiz is active
     useEffect(() => {
-        if (gameRef.current && gameRef.current.input && gameRef.current.input.keyboard) {
+        if (gameRef.current && gameRef.current.scene && gameRef.current.scene.scenes[0]) {
+            const scene = gameRef.current.scene.scenes[0];
+            
             if (isQuizActive) {
-                gameRef.current.input.keyboard.enabled = false;
+                // Disable keyboard input
+                if (gameRef.current.input && gameRef.current.input.keyboard) {
+                    gameRef.current.input.keyboard.enabled = false;
+                }
+                // Pause physics
+                if (scene.physics && scene.physics.world) {
+                    scene.physics.pause();
+                }
             } else {
-                gameRef.current.input.keyboard.enabled = true;
+                // Enable keyboard input
+                if (gameRef.current.input && gameRef.current.input.keyboard) {
+                    gameRef.current.input.keyboard.enabled = true;
+                }
+                // Resume physics
+                if (scene.physics && scene.physics.world) {
+                    scene.physics.resume();
+                }
             }
         }
     }, [isQuizActive])
