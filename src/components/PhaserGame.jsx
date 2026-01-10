@@ -148,10 +148,12 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             // Movement Logic
             if (keys.A.isDown || (cursors && cursors.left.isDown)) {
                 player.body.setVelocityX(-200)
+                player.setFlipX(true);
                 isMoving = true;
             }
             else if (keys.D.isDown || (cursors && cursors.right.isDown)) {
                 player.body.setVelocityX(200)
+                player.setFlipX(false);
                 isMoving = true;
             }
 
