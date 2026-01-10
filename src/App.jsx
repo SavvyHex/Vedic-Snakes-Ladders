@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PhaserGame from './components/PhaserGame';
 import levelData from './data/levelData';
 import { loadQuizQuestions } from './data/quizParser';
@@ -16,6 +16,34 @@ export default function App() {
   const [penaltyBooks, setPenaltyBooks] = useState(0); // Extra books needed due to wrong answers
   const [usedQuestionIndices, setUsedQuestionIndices] = useState([]); // Track which questions have been used
 
+  // Use refs to store the latest values for use in Phaser callbacks
+  const quizQuestionsRef = useRef({});
+  const answeredBooksRef = useRef([]);
+  const currentLevelRef = useRef(currentLevel);
+  const usedQuestionIndicesRef = useRef([]);
+
+  // Keep refs in sync with state
+  useEffect(() => {
+    quizQuestionsRef.current = quizQuestions;
+  }, [quizQuestions]);
+
+  useEffect(() => {
+    answeredBooksRef.current = answeredBooks;
+  }, [answeredBooks]);
+
+  useEffect(() => {
+    currentLevelRef.current = currentLevel;
+  }, [currentLevel]);
+
+  useEffect(() => {
+    usedQuestionIndicesRef.current = usedQuestionIndices;
+  }, [usedQuestionIndices]);
+
+  // Debug: Log whenever quizQuestions changes
+  useEffect(() => {
+    console.log('quizQuestions state changed:', quizQuestions, 'Keys:', Object.keys(quizQuestions));
+  }, [quizQuestions]);
+
   // Load quiz questions on mount
   useEffect(() => {
     console.log('Loading quiz questions...');
@@ -25,6 +53,11 @@ export default function App() {
         console.log('Type:', typeof questions);
         console.log('Keys:', Object.keys(questions));
         setQuizQuestions(questions);
+        console.log('State should be set now');
+        // Log state after a brief delay to confirm it was set
+        setTimeout(() => {
+          console.log('Checking state after set:', questions);
+        }, 100);
       })
       .catch(error => {
         console.error('Error loading quiz questions:', error);
@@ -39,26 +72,41 @@ export default function App() {
   }
 
   // --- HANDLERS ---
-  const handleVedaCollection = (bookIndex) => {
+  const handleVedaCollection = useCallback((bookIndex) => {
     console.log('Book collected:', bookIndex);
-    console.log('Answered books:', answeredBooks);
-    console.log('Quiz questions available:', quizQuestions);
+    console.log('Answered books:', answeredBooksRef.current);
+    console.log('Quiz questions available:', quizQuestionsRef.current);
+    console.log('Type of quizQuestions:', typeof quizQuestionsRef.current);
+    const keys = Object.keys(quizQuestionsRef.current);
+    console.log('Keys array:', keys);
+    console.log('Keys length:', keys.length);
+    console.log('Is quizQuestions empty?', keys.length === 0);
+    
+    // Check if quiz questions are loaded yet
+    if (!quizQuestionsRef.current || keys.length === 0) {
+      console.error('Quiz questions not loaded yet!');
+      alert('Please wait for quiz questions to load...');
+      return;
+    }
     
     // Check if this book has already been answered correctly
-    if (answeredBooks.includes(bookIndex)) {
+    if (answeredBooksRef.current.includes(bookIndex)) {
       console.log('Book already answered, skipping');
       return; // Already answered, don't show quiz again 
     }
 
     // Get a question for this book (convert level to string for key access)
-    const levelQuestions = quizQuestions[String(currentLevel)];
-    console.log('Current level:', currentLevel, 'Level questions:', levelQuestions);
+    const levelKey = String(currentLevelRef.current);
+    console.log('Looking for level key:', levelKey);
+    console.log('Available keys:', Object.keys(quizQuestionsRef.current));
+    const levelQuestions = quizQuestionsRef.current[levelKey];
+    console.log('Current level:', currentLevelRef.current, 'Level questions:', levelQuestions);
     
     if (levelQuestions && levelQuestions.length > 0) {
       // Get available questions that haven't been used yet
       const availableIndices = levelQuestions
         .map((_, idx) => idx)
-        .filter(idx => !usedQuestionIndices.includes(idx));
+        .filter(idx => !usedQuestionIndicesRef.current.includes(idx));
       
       let questionIndex;
       if (availableIndices.length > 0) {
@@ -78,9 +126,9 @@ export default function App() {
       setShowQuiz(true);
       console.log('Quiz should now be shown');
     } else {
-      console.error('No questions available for level', currentLevel);
+      console.error('No questions available for level', currentLevelRef.current);
     }
-  };
+  }, []); // Empty deps because we use refs
 
   const handleReachGate = () => {
     const requiredBooks = currentLevelData.totalVedas + penaltyBooks;
