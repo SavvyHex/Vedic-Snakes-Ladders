@@ -52,6 +52,13 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 frameWidth: 64,
                 frameHeight: 64
             });
+            // Load the idle spritesheet
+            scene.load.spritesheet('idle', '/assets/idle.png', {
+                frameWidth: 64,
+                frameHeight: 64
+            });
+            // Load the book sprite
+            scene.load.image('book', '/assets/book.png');
         }
 
         function create() {
@@ -81,22 +88,31 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 repeat: -1 // Loop indefinitely
             });
 
+            // Create idle animation
+            scene.anims.create({
+                key: 'idle',
+                frames: scene.anims.generateFrameNumbers('idle', { start: 0, end: 3 }),
+                frameRate: 8,
+                repeat: -1 // Loop indefinitely
+            });
+
             // --- VEDAS ---
             vedasGroup = scene.physics.add.staticGroup();
             vedaRects = []; // Reset array for new level
             
             level.vedas.forEach((vedaPos, index) => {
-                const rect = scene.add.rectangle(vedaPos.x, vedaPos.y, 20, 20, 0xffff00)
+                const book = scene.add.sprite(vedaPos.x, vedaPos.y, 'book')
+                book.setScale(1.0);
                 // We store the ID so we can tell React exactly which veda was taken
-                rect.setData('id', index);
+                book.setData('id', index);
                 // Initially hide all vedas except the first one
                 if (index === 0) {
-                    rect.setVisible(true);
+                    book.setVisible(true);
                 } else {
-                    rect.setVisible(false);
+                    book.setVisible(false);
                 }
-                vedasGroup.add(scene.physics.add.existing(rect, true));
-                vedaRects.push(rect);
+                vedasGroup.add(scene.physics.add.existing(book, true));
+                vedaRects.push(book);
             })
 
             // --- GATE ---
@@ -170,8 +186,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             if (isMoving) {
                 player.anims.play('walk', true);
             } else {
-                player.anims.stop();
-                player.setFrame(0); // Reset to first frame when idle
+                player.anims.play('idle', true);
             }
         }
 
