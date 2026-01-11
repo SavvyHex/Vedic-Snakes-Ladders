@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PhaserGame from './components/PhaserGame';
-import levelData from './data/levelData';
 import { loadQuizQuestions } from './data/quizParser';
 import './index.css'; 
 
@@ -16,6 +15,7 @@ export default function App() {
   const [currentQuestion, setCurrentQuestion] = useState(null); // Current question being asked
   const [penaltyBooks, setPenaltyBooks] = useState(0); // Extra books needed due to wrong answers
   const [usedQuestionIndices, setUsedQuestionIndices] = useState([]); // Track which questions have been used
+  const [booksPerLevel] = useState(3); // Base number of books per level
 
   // Use refs to store the latest values for use in Phaser callbacks
   const quizQuestionsRef = useRef({});
@@ -56,52 +56,21 @@ export default function App() {
     loadQuizQuestions()
       .then(questions => {
         console.log('Quiz questions loaded in App:', questions);
-        console.log('Type:', typeof questions);
-        console.log('Keys:', Object.keys(questions));
         setQuizQuestions(questions);
-        console.log('State should be set now');
-        // Log state after a brief delay to confirm it was set
-        setTimeout(() => {
-          console.log('Checking state after set:', questions);
-        }, 100);
       })
       .catch(error => {
         console.error('Error loading quiz questions:', error);
       });
   }, []);
 
-  // Safety Check: Ensure we have data for the current level
-  const currentLevelData = levelData[currentLevel - 1]; // levelData is 0-indexed array
-
-  if (!currentLevelData) {
-      return <div style={{color: 'white'}}>Error: No data for level {currentLevel}</div>;
+  // Check if we have questions for current level
+  const hasQuestionsForLevel = quizQuestions && quizQuestions[String(currentLevel)] && quizQuestions[String(currentLevel)].length > 0;
+  
+  if (!hasQuestionsForLevel && Object.keys(quizQuestions).length > 0) {
+    return <div style={{color: 'white', padding: '20px'}}>No questions available for level {currentLevel}</div>;
   }
 
-  // Generate dynamic veda positions including penalty books
-  const getVedaPositions = () => {
-    const baseVedas = currentLevelData.vedas;
-    const totalRequired = currentLevelData.totalVedas + penaltyBooks;
-    
-    // If we need more vedas than we have, generate additional positions
-    if (totalRequired > baseVedas.length) {
-      const additionalVedas = [];
-      const extraNeeded = totalRequired - baseVedas.length;
-      
-      // Generate random positions for penalty books
-      for (let i = 0; i < extraNeeded; i++) {
-        additionalVedas.push({
-          x: 100 + Math.random() * 600,  // Random x between 100-700
-          y: 100 + Math.random() * 400   // Random y between 100-500
-        });
-      }
-      
-      return [...baseVedas, ...additionalVedas];
-    }
-    
-    return baseVedas;
-  };
-
-  const vedaPositions = getVedaPositions();
+  const totalBooksRequired = booksPerLevel + penaltyBooks;
 
   // --- HANDLERS ---
   const handleVedaCollection = useCallback((bookIndex) => {
@@ -166,12 +135,10 @@ export default function App() {
   }, []); // Empty deps because we use refs
 
   const handleReachGate = () => {
-    const requiredBooks = currentLevelData.totalVedas + penaltyBooks;
-    // Only allow through gate if enough books have been answered correctly (including penalties)
-    if (answeredBooks.length >= requiredBooks) {
-      // All books answered correctly, proceed to next level
-      advanceToNextLevel();
-    }
+    console.log('handleReachGate called! Advancing to next level!');
+    // PhaserGame already verified we have enough correct answers using the ref
+    // No need to check again here with potentially stale state
+    advanceToNextLevel();
   };
 
   const handleSubmitAnswer = (selectedAnswer) => {
@@ -193,8 +160,7 @@ export default function App() {
       setCurrentBookIndex(null);
       
       // Check if all books are answered (including penalties)
-      const requiredBooks = currentLevelData.totalVedas + penaltyBooks;
-      if (answeredBooks.length + 1 >= requiredBooks) {
+      if (answeredBooks.length + 1 >= totalBooksRequired) {
         // Show message that gate is now open
         setTimeout(() => {
           alert("All wisdom collected! The gate is now open. Proceed to ascend!");
@@ -230,16 +196,15 @@ export default function App() {
     setPenaltyBooks(0);
     setUsedQuestionIndices([]);
     
-    // Advance Level (game will restart automatically when currentLevel changes)
-    if (currentLevel < levelData.length) {
-        setCurrentLevel(prev => prev + 1);
+    // Check if next level has questions
+    const nextLevel = currentLevel + 1;
+    if (quizQuestions[String(nextLevel)] && quizQuestions[String(nextLevel)].length > 0) {
+        setCurrentLevel(nextLevel);
     } else {
-        alert("You have reached Ultimate Liberation!");
+        alert("You have completed all available levels!");
         setCurrentLevel(1); // Loop back to start
     }
   };
-
-  const requiredBooks = currentLevelData.totalVedas + penaltyBooks;
   
   return (
     <div style={{ display: 'flex', flexDirection: 'column', padding: '20px', backgroundColor: '#1a1a1a', minHeight: '100vh' }}>
@@ -247,7 +212,7 @@ export default function App() {
       {/* GAME AREA */}
       <div>
         <h2 style={{ color: '#ffd700', fontFamily: 'monospace' }}>
-          {currentLevelData.levelName} - Books: {collectedBooks.length} collected | Correct: {answeredBooks.length}/{requiredBooks}
+          Level {currentLevel} - Books: {collectedBooks.length} collected | Correct: {answeredBooks.length}/{totalBooksRequired}
           {penaltyBooks > 0 && <span style={{ color: '#ff6b6b', marginLeft: '10px' }}>(+{penaltyBooks} penalty)</span>}
         </h2>
         {/* We pass the level and handlers down to the game */}
@@ -259,8 +224,7 @@ export default function App() {
           restartKey={restartKey}
           answeredBooksCount={collectedBooks.length}
           correctAnswersCount={answeredBooks.length}
-          vedaPositions={vedaPositions}
-          totalVedas={currentLevelData.totalVedas + penaltyBooks}
+          totalBooksRequired={totalBooksRequired}
         />
       </div>
 

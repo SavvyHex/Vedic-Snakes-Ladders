@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import Phaser from 'phaser'
-import levelData from '../data/levelData'
 
 // This component now only handles Physics and Inputs. 
 // It sends signals (props) up to App.jsx when things happen.
-export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive, restartKey, answeredBooksCount, correctAnswersCount, vedaPositions, totalVedas }) {
+export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive, restartKey, answeredBooksCount, correctAnswersCount, totalBooksRequired }) {
     const containerRef = useRef(null)
     const gameRef = useRef(null)
     const correctAnswersRef = useRef(0);
@@ -27,19 +26,26 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
         let keys
         let cursors
         let vedasGroup 
-        let totalVedasRequired // Track total vedas needed (including penalties)
         let score = 0 // Internal score to know when to open gate
         let vedaRects = [] // Store references to reveal them sequentially
         let gate // Gate reference for continuous checking
         let gateTriggered = false // Prevent multiple triggers
         let sceneRef // Reference to scene for update function
 
+        // Define game dimensions and spawn areas
+        const GAME_WIDTH = 800;
+        const GAME_HEIGHT = 600;
+        const PLAYER_START = { x: 100, y: 500 }; // Bottom left
+        const GATE_POS = { x: 750, y: 100 }; // Top right
+        const MIN_DISTANCE_FROM_GATE = 150; // Books can't spawn too close to gate
+        const MIN_DISTANCE_FROM_PLAYER = 150; // Books can't spawn too close to player start
+
         const config = {
             type: Phaser.AUTO,
-            width: 800,
-            height: 600,
+            width: GAME_WIDTH,
+            height: GAME_HEIGHT,
             parent: containerRef.current,
-            backgroundColor: levelData[currentLevel]?.backgroundColor || '#000',
+            backgroundColor: '#000',
             render: {
                 pixelArt: true
             },
@@ -74,20 +80,39 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             const scene = this; 
             sceneRef = scene; // Store scene reference
             score = 0;
-
-            // Safety Check: If level data is missing, stop here to prevent crash
-            const level = levelData[currentLevel - 1]; // levelData is 0-indexed array
-            if (!level) {
-                console.error("Level data missing for level:", currentLevel);
-                return;
-            }
             
-            // Use passed totalVedas instead of level.totalVedas
-            // This allows for dynamic penalty books
-            totalVedasRequired = totalVedas || level.totalVedas;
+            // Helper function to generate random position avoiding player and gate
+            const generateBookPosition = () => {
+                let validPosition = false;
+                let x, y;
+                let attempts = 0;
+                const maxAttempts = 100;
+                
+                while (!validPosition && attempts < maxAttempts) {
+                    x = 100 + Math.random() * (GAME_WIDTH - 200);  // Random x with margins
+                    y = 100 + Math.random() * (GAME_HEIGHT - 200); // Random y with margins
+                    
+                    // Check distance from player start
+                    const distFromPlayer = Math.sqrt(
+                        Math.pow(x - PLAYER_START.x, 2) + Math.pow(y - PLAYER_START.y, 2)
+                    );
+                    
+                    // Check distance from gate
+                    const distFromGate = Math.sqrt(
+                        Math.pow(x - GATE_POS.x, 2) + Math.pow(y - GATE_POS.y, 2)
+                    );
+                    
+                    if (distFromPlayer >= MIN_DISTANCE_FROM_PLAYER && distFromGate >= MIN_DISTANCE_FROM_GATE) {
+                        validPosition = true;
+                    }
+                    attempts++;
+                }
+                
+                return { x, y };
+            };
 
             // --- PLAYER ---
-            player = scene.add.sprite(100, 100, 'walking')
+            player = scene.add.sprite(PLAYER_START.x, PLAYER_START.y, 'walking')
             player.setScale(1.0) // Adjust scale if needed
             scene.physics.add.existing(player)
             player.body.setCollideWorldBounds(true)
@@ -112,21 +137,21 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             vedasGroup = scene.physics.add.staticGroup();
             vedaRects = []; // Reset array for new level
             
-            // Use passed vedaPositions instead of level.vedas
-            const positions = vedaPositions || level.vedas;
-            positions.forEach((vedaPos, index) => {
-                const book = scene.add.sprite(vedaPos.x, vedaPos.y, 'book')
+            // Generate random positions for books
+            for (let i = 0; i < totalBooksRequired; i++) {
+                const pos = generateBookPosition();
+                const book = scene.add.sprite(pos.x, pos.y, 'book')
                 book.setScale(1.0);
                 // We store the ID so we can tell React exactly which veda was taken
-                book.setData('id', index);
+                book.setData('id', i);
                 // Only show the current book (based on how many have been answered)
-                book.setVisible(index === 0); // Start with first book visible
+                book.setVisible(i === 0); // Start with first book visible
                 vedasGroup.add(scene.physics.add.existing(book, true));
                 vedaRects.push(book);
-            })
+            }
 
             // --- GATE ---
-            gate = scene.add.rectangle(750, 275, 20, 50, 0xff0000)
+            gate = scene.add.rectangle(GATE_POS.x, GATE_POS.y, 30, 60, 0xff0000)
             scene.physics.add.existing(gate, true)
 
             // --- CONTROLS ---
@@ -185,9 +210,9 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
 
             // Check gate collision continuously
             if (gate && !gateTriggered && sceneRef && sceneRef.physics.overlap(player, gate)) {
-                console.log('At gate! Correct answers:', correctAnswersRef.current, 'Required:', totalVedasRequired);
+                console.log('At gate! Correct answers:', correctAnswersRef.current, 'Required:', totalBooksRequired);
                 
-                if (correctAnswersRef.current >= totalVedasRequired) {
+                if (correctAnswersRef.current >= totalBooksRequired) {
                     gateTriggered = true; // Prevent multiple triggers
                     console.log('Level complete! Advancing...');
                     // Signal React: "User finished level!"
@@ -204,7 +229,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 gameRef.current = null
             }
         }
-    }, [currentLevel, restartKey]) // Restart game when currentLevel or restartKey changes
+    }, [currentLevel, restartKey, totalBooksRequired]) // Restart game when these change
 
     // Update book visibility when answeredBooksCount changes
     useEffect(() => {
@@ -219,41 +244,6 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             });
         }
     }, [answeredBooksCount]);
-
-    // Dynamically add new books when vedaPositions increases (penalty books)
-    useEffect(() => {
-        if (gameRef.current && gameRef.current.scene && gameRef.current.scene.scenes[0]) {
-            const scene = gameRef.current.scene.scenes[0];
-            const books = scene.children.list.filter(child => child.texture && child.texture.key === 'book');
-            
-            // If we need more books than currently exist, add them
-            if (vedaPositions && vedaPositions.length > books.length) {
-                const vedasGroup = scene.physics.world.staticBodies.entries.find(body => {
-                    return body.gameObject && body.gameObject.texture && body.gameObject.texture.key === 'book';
-                })?.gameObject?.parentContainer || scene.children.list.find(child => child.type === 'Group');
-                
-                // Add the new books
-                for (let i = books.length; i < vedaPositions.length; i++) {
-                    const vedaPos = vedaPositions[i];
-                    const book = scene.add.sprite(vedaPos.x, vedaPos.y, 'book');
-                    book.setScale(1.0);
-                    book.setData('id', i);
-                    book.setVisible(i === answeredBooksCount); // Show only if it's the next one
-                    scene.physics.add.existing(book, true);
-                    
-                    // Add overlap detection for the new book
-                    const player = scene.children.list.find(child => child.anims && child.anims.currentAnim);
-                    if (player) {
-                        scene.physics.add.overlap(player, book, (p, v) => {
-                            v.body.enable = false;
-                            v.setVisible(false);
-                            if(onCollectVeda) onCollectVeda(v.getData('id'));
-                        }, null, scene);
-                    }
-                }
-            }
-        }
-    }, [vedaPositions, answeredBooksCount, onCollectVeda]);
 
     // Handle disabling keyboard input and pausing physics when quiz is active
     useEffect(() => {
