@@ -258,6 +258,7 @@ export default function App() {
           isQuizActive={showQuiz}
           restartKey={restartKey}
           answeredBooksCount={collectedBooks.length}
+          correctAnswersCount={answeredBooks.length}
           vedaPositions={vedaPositions}
           totalVedas={currentLevelData.totalVedas + penaltyBooks}
         />

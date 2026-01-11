@@ -4,9 +4,15 @@ import levelData from '../data/levelData'
 
 // This component now only handles Physics and Inputs. 
 // It sends signals (props) up to App.jsx when things happen.
-export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive, restartKey, answeredBooksCount, vedaPositions, totalVedas }) {
+export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive, restartKey, answeredBooksCount, correctAnswersCount, vedaPositions, totalVedas }) {
     const containerRef = useRef(null)
     const gameRef = useRef(null)
+    const correctAnswersRef = useRef(0);
+
+    // Keep track of correct answers in a ref
+    useEffect(() => {
+        correctAnswersRef.current = correctAnswersCount || 0;
+    }, [correctAnswersCount]);
 
     useEffect(() => {
         if (!containerRef.current) return
@@ -21,9 +27,12 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
         let keys
         let cursors
         let vedasGroup 
-        let totalVedas
+        let totalVedasRequired // Track total vedas needed (including penalties)
         let score = 0 // Internal score to know when to open gate
         let vedaRects = [] // Store references to reveal them sequentially
+        let gate // Gate reference for continuous checking
+        let gateTriggered = false // Prevent multiple triggers
+        let sceneRef // Reference to scene for update function
 
         const config = {
             type: Phaser.AUTO,
@@ -63,6 +72,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
 
         function create() {
             const scene = this; 
+            sceneRef = scene; // Store scene reference
             score = 0;
 
             // Safety Check: If level data is missing, stop here to prevent crash
@@ -74,7 +84,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             
             // Use passed totalVedas instead of level.totalVedas
             // This allows for dynamic penalty books
-            const requiredVedas = totalVedas || level.totalVedas;
+            totalVedasRequired = totalVedas || level.totalVedas;
 
             // --- PLAYER ---
             player = scene.add.sprite(100, 100, 'walking')
@@ -116,7 +126,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             })
 
             // --- GATE ---
-            const gate = scene.add.rectangle(750, 275, 20, 50, 0xff0000)
+            gate = scene.add.rectangle(750, 275, 20, 50, 0xff0000)
             scene.physics.add.existing(gate, true)
 
             // --- CONTROLS ---
@@ -136,14 +146,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 if(onCollectVeda) onCollectVeda(v.getData('id'));
             }, null, scene)
 
-            // 2. Hit Gate
-            scene.physics.add.collider(player, gate, () => {
-                if (score >= requiredVedas) {
-                    scene.physics.pause(); // Stop the game
-                    // Signal React: "User finished level!"
-                    if(onReachGate) onReachGate();
-                }
-            }, null, scene)
+            // Note: Gate collision now checked in update() function
         }
 
         function update() {
@@ -178,6 +181,18 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 player.anims.play('walk', true);
             } else {
                 player.anims.play('idle', true);
+            }
+
+            // Check gate collision continuously
+            if (gate && !gateTriggered && sceneRef && sceneRef.physics.overlap(player, gate)) {
+                console.log('At gate! Correct answers:', correctAnswersRef.current, 'Required:', totalVedasRequired);
+                
+                if (correctAnswersRef.current >= totalVedasRequired) {
+                    gateTriggered = true; // Prevent multiple triggers
+                    console.log('Level complete! Advancing...');
+                    // Signal React: "User finished level!"
+                    if(onReachGate) onReachGate();
+                }
             }
         }
 
