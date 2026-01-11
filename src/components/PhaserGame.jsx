@@ -192,10 +192,19 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 // Only create the current book that should be collectible
                 // Don't create invisible books that can be accidentally collected
                 const pos = generateBookPosition();
+                
                 const book = scene.add.sprite(pos.x, pos.y, 'book')
                 book.setScale(1.0);
+                book.setOrigin(0.5, 0.5);
+                book.setDepth(1);
+                
+                // Create white glow behind the book, offset slightly for proper alignment
+                const glow = scene.add.circle(book.x - 3, book.y - 3, 35, 0xffffff, 0.3);
+                glow.setDepth(0);
+                
                 // Store the ID (index based on correct answers count)
                 book.setData('id', correctAnswersCount);
+                book.setData('glow', glow); // Store glow reference
                 book.setVisible(true);
                 vedasGroup.add(scene.physics.add.existing(book, true));
                 vedaRects.push(book);
@@ -252,9 +261,13 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                     bookSound.play();
                 }
                 
-                // Disable and hide the book
+                // Disable and hide the book and its glow
                 v.body.enable = false; // 1. Turn off physics so you can't hit it again
                 v.setVisible(false);   // 2. Make it invisible
+                const glow = v.getData('glow');
+                if (glow) {
+                    glow.setVisible(false);
+                }
 
                 score++;
                 
@@ -356,9 +369,18 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 };
                 
                 const pos = generatePosition();
+                
                 const book = scene.add.sprite(pos.x, pos.y, 'book');
                 book.setScale(1.0);
+                book.setOrigin(0.5, 0.5);
+                book.setDepth(1);
+                
+                // Create white glow behind the book, offset slightly for proper alignment
+                const glow = scene.add.circle(book.x - 3, book.y - 3, 35, 0xffffff, 0.3);
+                glow.setDepth(0);
+                
                 book.setData('id', correctAnswersCount);
+                book.setData('glow', glow); // Store glow reference
                 book.setVisible(true);
                 scene.physics.add.existing(book, true);
                 
@@ -376,6 +398,10 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                         
                         v.body.enable = false;
                         v.setVisible(false);
+                        const glow = v.getData('glow');
+                        if (glow) {
+                            glow.setVisible(false);
+                        }
                         if (onCollectVeda) onCollectVeda(v.getData('id'));
                     }, null, scene);
                 }
