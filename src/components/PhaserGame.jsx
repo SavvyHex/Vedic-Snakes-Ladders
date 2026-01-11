@@ -45,9 +45,9 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             width: GAME_WIDTH,
             height: GAME_HEIGHT,
             parent: containerRef.current,
-            render: {
-                pixelArt: true
-            },
+            pixelArt: true,
+            antialias: false,
+            roundPixels: true,
             physics: {
                 default: 'arcade',
                 arcade: { debug: false }
