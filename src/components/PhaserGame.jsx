@@ -3,7 +3,7 @@ import Phaser from 'phaser'
 
 // This component now only handles Physics and Inputs. 
 // It sends signals (props) up to App.jsx when things happen.
-export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive, restartKey, answeredBooksCount, correctAnswersCount, totalBooksRequired }) {
+export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive, restartKey, correctAnswersCount, totalBooksRequired }) {
     const containerRef = useRef(null)
     const gameRef = useRef(null)
     const correctAnswersRef = useRef(0);
@@ -137,18 +137,16 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             vedasGroup = scene.physics.add.staticGroup();
             vedaRects = []; // Reset array for new level
             
-            // Generate random positions for books
-            for (let i = 0; i < totalBooksRequired; i++) {
-                const pos = generateBookPosition();
-                const book = scene.add.sprite(pos.x, pos.y, 'book')
-                book.setScale(1.0);
-                // We store the ID so we can tell React exactly which veda was taken
-                book.setData('id', i);
-                // Only show the current book (based on how many have been answered)
-                book.setVisible(i === 0); // Start with first book visible
-                vedasGroup.add(scene.physics.add.existing(book, true));
-                vedaRects.push(book);
-            }
+            // Only create the current book that should be collectible
+            // Don't create invisible books that can be accidentally collected
+            const pos = generateBookPosition();
+            const book = scene.add.sprite(pos.x, pos.y, 'book')
+            book.setScale(1.0);
+            // Store the ID (index based on correct answers count)
+            book.setData('id', correctAnswersCount);
+            book.setVisible(true);
+            vedasGroup.add(scene.physics.add.existing(book, true));
+            vedaRects.push(book);
 
             // --- GATE ---
             gate = scene.add.rectangle(GATE_POS.x, GATE_POS.y, 30, 60, 0xff0000)
@@ -161,6 +159,9 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             // --- COLLISIONS ---
             // 1. Collect Veda
             scene.physics.add.overlap(player, vedasGroup, (p, v) => {
+                // Only collect if book hasn't been collected yet
+                if (v.body.enable === false) return;
+                
                 // Disable and hide the book
                 v.body.enable = false; // 1. Turn off physics so you can't hit it again
                 v.setVisible(false);   // 2. Make it invisible
@@ -229,21 +230,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 gameRef.current = null
             }
         }
-    }, [currentLevel, restartKey, totalBooksRequired]) // Restart game when these change
-
-    // Update book visibility when answeredBooksCount changes
-    useEffect(() => {
-        if (gameRef.current && gameRef.current.scene && gameRef.current.scene.scenes[0]) {
-            const scene = gameRef.current.scene.scenes[0];
-            // Get all book sprites and show only the next one to collect
-            const books = scene.children.list.filter(child => child.texture && child.texture.key === 'book');
-            books.forEach((book, index) => {
-                if (index === answeredBooksCount && book.body && book.body.enable !== false) {
-                    book.setVisible(true);
-                }
-            });
-        }
-    }, [answeredBooksCount]);
+    }, [currentLevel, restartKey, totalBooksRequired, correctAnswersCount]) // Restart game when book should change
 
     // Handle disabling keyboard input and pausing physics when quiz is active
     useEffect(() => {
