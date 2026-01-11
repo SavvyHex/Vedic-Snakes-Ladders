@@ -196,11 +196,16 @@ export default function App() {
     setPenaltyBooks(0);
     setUsedQuestionIndices([]);
     
-    // Check if next level has questions
+    // Check if next level has questions (use ref to get latest data)
     const nextLevel = currentLevel + 1;
-    if (quizQuestions[String(nextLevel)] && quizQuestions[String(nextLevel)].length > 0) {
+    console.log('Checking for next level:', nextLevel);
+    console.log('Available levels:', Object.keys(quizQuestionsRef.current));
+    
+    if (quizQuestionsRef.current[String(nextLevel)] && quizQuestionsRef.current[String(nextLevel)].length > 0) {
+        console.log('Advancing to level', nextLevel);
         setCurrentLevel(nextLevel);
     } else {
+        console.log('No more levels available');
         alert("You have completed all available levels!");
         setCurrentLevel(1); // Loop back to start
     }
