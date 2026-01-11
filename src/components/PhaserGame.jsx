@@ -40,8 +40,8 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
         const GAME_HEIGHT = 600;
         const PLAYER_START = { x: 100, y: 500 }; // Bottom left
         const GATE_POS = { x: 750, y: 100 }; // Top right
-        const MIN_DISTANCE_FROM_GATE = 150; // Books can't spawn too close to gate
-        const MIN_DISTANCE_FROM_PLAYER = 150; // Books can't spawn too close to player start
+        const MIN_DISTANCE_FROM_GATE = 200; // Books can't spawn too close to gate
+        const MIN_DISTANCE_FROM_PLAYER = 200; // Books can't spawn too close to player start
 
         const config = {
             type: Phaser.AUTO,
@@ -351,7 +351,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                     const GAME_WIDTH = 800, GAME_HEIGHT = 600;
                     const PLAYER_START = { x: 100, y: 500 };
                     const GATE_POS = { x: 750, y: 100 };
-                    const MIN_DISTANCE = 150;
+                    const MIN_DISTANCE = 200;
                     
                     while (!validPosition && attempts < 100) {
                         x = 100 + Math.random() * (GAME_WIDTH - 200);
