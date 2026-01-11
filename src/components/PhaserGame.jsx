@@ -73,6 +73,8 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             });
             // Load the book sprite
             scene.load.image('book', '/assets/book.png');
+            // Load door sprite
+            scene.load.image('door', '/assets/door.png');
             // Load tilemap tiles
             scene.load.image('floor_1', '/assets/floor_1.png');
             scene.load.image('sand1', '/assets/sand1.png');
@@ -183,9 +185,25 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 vedaRects.push(book);
             }
 
-            // --- GATE ---
-            gate = scene.add.rectangle(GATE_POS.x, GATE_POS.y, 30, 60, 0xff0000)
-            scene.physics.add.existing(gate, true)
+            // --- GATE (DOUBLE DOOR) ---
+            // Create a group for both door halves
+            const gateGroup = scene.physics.add.staticGroup();
+            
+            // Left door (normal)
+            const leftDoor = scene.add.sprite(GATE_POS.x - 15, GATE_POS.y, 'door');
+            leftDoor.setOrigin(0.5, 0.5);
+            scene.physics.add.existing(leftDoor, true);
+            gateGroup.add(leftDoor);
+            
+            // Right door (flipped horizontally)
+            const rightDoor = scene.add.sprite(GATE_POS.x + 15, GATE_POS.y, 'door');
+            rightDoor.setOrigin(0.5, 0.5);
+            rightDoor.setFlipX(true);
+            scene.physics.add.existing(rightDoor, true);
+            gateGroup.add(rightDoor);
+            
+            // Use the group as the gate for collision detection
+            gate = gateGroup;
 
             // --- CONTROLS ---
             keys = scene.input.keyboard.addKeys('W,A,S,D')
