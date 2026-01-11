@@ -1,0 +1,18 @@
+{
+  "1": [
+    {"number": 1, "question": "According to the teachings, which path is recommended to remove 'mala' (impurity)?", "options": [{"letter": "A", "text": "Bhakti Marga (Path of Devotion)"}, {"letter": "B", "text": "Jnana Marga (Path of Knowledge)"}, {"letter": "C", "text": "Karma Marga (Path of Action)"}, {"letter": "D", "text": "Raja Yoga"}], "answer": "C"},
+    {"number": 2, "question": "What analogy is used to describe the effect of 'mala' on the mind?", "options": [{"letter": "A", "text": "A locked treasure chest"}, {"letter": "B", "text": "Dust accumulating on a mirror"}, {"letter": "C", "text": "A river blocked by stones"}, {"letter": "D", "text": "A lamp covered by a basket"}], "answer": "B"},
+    {"number": 3, "question": "Which of the following is a solution for 'vikshepa' (mental wavering) as per the teachings?", "options": [{"letter": "A", "text": "Fasting"}, {"letter": "B", "text": "Steady application in worship and adoration (Upasana/Bhakti)"}, {"letter": "C", "text": "Physical exercise"}, {"letter": "D", "text": "Charity"}], "answer": "B"},
+    {"number": 4, "question": "Which of the following best describes 'Avarana'?", "options": [{"letter": "A", "text": "The wavering of the mind"}, {"letter": "B", "text": "The veil that hides the reality of the Self"}, {"letter": "C", "text": "The accumulation of good karma"}, {"letter": "D", "text": "The process of meditation"}], "answer": "B"},
+    {"number": 5, "question": "The end of education is", "options": [{"letter": "A", "text": "Knowledge"}, {"letter": "B", "text": "Power"}, {"letter": "C", "text": "Character"}, {"letter": "D", "text": "Money"}], "answer": "C"}
+  ],
+  "2": [
+    {"number": 1, "question": "What is the main purpose of spiritual practice?", "options": [{"letter": "A", "text": "To gain worldly success"}, {"letter": "B", "text": "To know oneself"}, {"letter": "C", "text": "To impress others"}, {"letter": "D", "text": "To avoid responsibilities"}], "answer": "B"}
+  ],
+  "3": [
+    {"number": 1, "question": "What is the foundation of ethics?", "options": [{"letter": "A", "text": "Personal gain"}, {"letter": "B", "text": "Social approval"}, {"letter": "C", "text": "Truth and compassion"}, {"letter": "D", "text": "Power"}], "answer": "C"}
+  ],
+  "4": [
+    {"number": 1, "question": "What opens the path of deep seeing?", "options": [{"letter": "A", "text": "Wealth"}, {"letter": "B", "text": "Knowledge"}, {"letter": "C", "text": "Fame"}, {"letter": "D", "text": "Power"}], "answer": "B"}
+  ]
+}

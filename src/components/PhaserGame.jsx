@@ -1,12 +1,17 @@
 import React, { useEffect, useRef } from 'react'
 import Phaser from 'phaser'
-import levelData from '../data/levelData'
 
 // This component now only handles Physics and Inputs. 
 // It sends signals (props) up to App.jsx when things happen.
-export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive, restartKey }) {
+export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive, restartKey, answeredBooksCount, correctAnswersCount, totalBooksRequired }) {
     const containerRef = useRef(null)
     const gameRef = useRef(null)
+    const correctAnswersRef = useRef(0);
+
+    // Keep track of correct answers in a ref
+    useEffect(() => {
+        correctAnswersRef.current = correctAnswersCount || 0;
+    }, [correctAnswersCount]);
 
     useEffect(() => {
         if (!containerRef.current) return
@@ -21,16 +26,26 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
         let keys
         let cursors
         let vedasGroup 
-        let totalVedas
         let score = 0 // Internal score to know when to open gate
         let vedaRects = [] // Store references to reveal them sequentially
+        let gate // Gate reference for continuous checking
+        let gateTriggered = false // Prevent multiple triggers
+        let sceneRef // Reference to scene for update function
+
+        // Define game dimensions and spawn areas
+        const GAME_WIDTH = 800;
+        const GAME_HEIGHT = 600;
+        const PLAYER_START = { x: 100, y: 500 }; // Bottom left
+        const GATE_POS = { x: 750, y: 100 }; // Top right
+        const MIN_DISTANCE_FROM_GATE = 150; // Books can't spawn too close to gate
+        const MIN_DISTANCE_FROM_PLAYER = 150; // Books can't spawn too close to player start
 
         const config = {
             type: Phaser.AUTO,
-            width: 800,
-            height: 600,
+            width: GAME_WIDTH,
+            height: GAME_HEIGHT,
             parent: containerRef.current,
-            backgroundColor: levelData[currentLevel]?.backgroundColor || '#000',
+            backgroundColor: '#000',
             render: {
                 pixelArt: true
             },
@@ -63,19 +78,41 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
 
         function create() {
             const scene = this; 
+            sceneRef = scene; // Store scene reference
             score = 0;
-
-            // Safety Check: If level data is missing, stop here to prevent crash
-            const level = levelData[currentLevel];
-            if (!level) {
-                console.error("Level data missing for index:", currentLevel);
-                return;
-            }
             
-            totalVedas = level.totalVedas
+            // Helper function to generate random position avoiding player and gate
+            const generateBookPosition = () => {
+                let validPosition = false;
+                let x, y;
+                let attempts = 0;
+                const maxAttempts = 100;
+                
+                while (!validPosition && attempts < maxAttempts) {
+                    x = 100 + Math.random() * (GAME_WIDTH - 200);  // Random x with margins
+                    y = 100 + Math.random() * (GAME_HEIGHT - 200); // Random y with margins
+                    
+                    // Check distance from player start
+                    const distFromPlayer = Math.sqrt(
+                        Math.pow(x - PLAYER_START.x, 2) + Math.pow(y - PLAYER_START.y, 2)
+                    );
+                    
+                    // Check distance from gate
+                    const distFromGate = Math.sqrt(
+                        Math.pow(x - GATE_POS.x, 2) + Math.pow(y - GATE_POS.y, 2)
+                    );
+                    
+                    if (distFromPlayer >= MIN_DISTANCE_FROM_PLAYER && distFromGate >= MIN_DISTANCE_FROM_GATE) {
+                        validPosition = true;
+                    }
+                    attempts++;
+                }
+                
+                return { x, y };
+            };
 
             // --- PLAYER ---
-            player = scene.add.sprite(100, 100, 'walking')
+            player = scene.add.sprite(PLAYER_START.x, PLAYER_START.y, 'walking')
             player.setScale(1.0) // Adjust scale if needed
             scene.physics.add.existing(player)
             player.body.setCollideWorldBounds(true)
@@ -100,23 +137,21 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             vedasGroup = scene.physics.add.staticGroup();
             vedaRects = []; // Reset array for new level
             
-            level.vedas.forEach((vedaPos, index) => {
-                const book = scene.add.sprite(vedaPos.x, vedaPos.y, 'book')
+            // Generate random positions for books
+            for (let i = 0; i < totalBooksRequired; i++) {
+                const pos = generateBookPosition();
+                const book = scene.add.sprite(pos.x, pos.y, 'book')
                 book.setScale(1.0);
                 // We store the ID so we can tell React exactly which veda was taken
-                book.setData('id', index);
-                // Initially hide all vedas except the first one
-                if (index === 0) {
-                    book.setVisible(true);
-                } else {
-                    book.setVisible(false);
-                }
+                book.setData('id', i);
+                // Only show the current book (based on how many have been answered)
+                book.setVisible(i === 0); // Start with first book visible
                 vedasGroup.add(scene.physics.add.existing(book, true));
                 vedaRects.push(book);
-            })
+            }
 
             // --- GATE ---
-            const gate = scene.add.rectangle(750, 275, 20, 50, 0xff0000)
+            gate = scene.add.rectangle(GATE_POS.x, GATE_POS.y, 30, 60, 0xff0000)
             scene.physics.add.existing(gate, true)
 
             // --- CONTROLS ---
@@ -126,33 +161,17 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             // --- COLLISIONS ---
             // 1. Collect Veda
             scene.physics.add.overlap(player, vedasGroup, (p, v) => {
-                // --- THIS IS THE FIX ---
-                // Old crashy code was: v.disableBody(true, true);
-                
-                // New working code:
+                // Disable and hide the book
                 v.body.enable = false; // 1. Turn off physics so you can't hit it again
                 v.setVisible(false);   // 2. Make it invisible
-                // -----------------------
 
                 score++;
                 
-                // Reveal the next veda (if there is one)
-                if (score < vedaRects.length) {
-                    vedaRects[score].setVisible(true);
-                }
-                
-                // Signal React: "User collected a veda!"
+                // Signal React: "User collected a veda!" with the book index
                 if(onCollectVeda) onCollectVeda(v.getData('id'));
             }, null, scene)
 
-            // 2. Hit Gate
-            scene.physics.add.collider(player, gate, () => {
-                if (score >= totalVedas) {
-                    scene.physics.pause(); // Stop the game
-                    // Signal React: "User finished level!"
-                    if(onReachGate) onReachGate();
-                }
-            }, null, scene)
+            // Note: Gate collision now checked in update() function
         }
 
         function update() {
@@ -188,6 +207,18 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             } else {
                 player.anims.play('idle', true);
             }
+
+            // Check gate collision continuously
+            if (gate && !gateTriggered && sceneRef && sceneRef.physics.overlap(player, gate)) {
+                console.log('At gate! Correct answers:', correctAnswersRef.current, 'Required:', totalBooksRequired);
+                
+                if (correctAnswersRef.current >= totalBooksRequired) {
+                    gateTriggered = true; // Prevent multiple triggers
+                    console.log('Level complete! Advancing...');
+                    // Signal React: "User finished level!"
+                    if(onReachGate) onReachGate();
+                }
+            }
         }
 
         gameRef.current = new Phaser.Game(config)
@@ -198,15 +229,45 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 gameRef.current = null
             }
         }
-    }, [currentLevel, restartKey]) // Restart game when currentLevel or restartKey changes
+    }, [currentLevel, restartKey, totalBooksRequired]) // Restart game when these change
 
-    // Handle disabling keyboard input when quiz is active
+    // Update book visibility when answeredBooksCount changes
     useEffect(() => {
-        if (gameRef.current && gameRef.current.input && gameRef.current.input.keyboard) {
+        if (gameRef.current && gameRef.current.scene && gameRef.current.scene.scenes[0]) {
+            const scene = gameRef.current.scene.scenes[0];
+            // Get all book sprites and show only the next one to collect
+            const books = scene.children.list.filter(child => child.texture && child.texture.key === 'book');
+            books.forEach((book, index) => {
+                if (index === answeredBooksCount && book.body && book.body.enable !== false) {
+                    book.setVisible(true);
+                }
+            });
+        }
+    }, [answeredBooksCount]);
+
+    // Handle disabling keyboard input and pausing physics when quiz is active
+    useEffect(() => {
+        if (gameRef.current && gameRef.current.scene && gameRef.current.scene.scenes[0]) {
+            const scene = gameRef.current.scene.scenes[0];
+            
             if (isQuizActive) {
-                gameRef.current.input.keyboard.enabled = false;
+                // Disable keyboard input
+                if (gameRef.current.input && gameRef.current.input.keyboard) {
+                    gameRef.current.input.keyboard.enabled = false;
+                }
+                // Pause physics
+                if (scene.physics && scene.physics.world) {
+                    scene.physics.pause();
+                }
             } else {
-                gameRef.current.input.keyboard.enabled = true;
+                // Enable keyboard input
+                if (gameRef.current.input && gameRef.current.input.keyboard) {
+                    gameRef.current.input.keyboard.enabled = true;
+                }
+                // Resume physics
+                if (scene.physics && scene.physics.world) {
+                    scene.physics.resume();
+                }
             }
         }
     }, [isQuizActive])
