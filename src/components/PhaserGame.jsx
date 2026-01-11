@@ -82,6 +82,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             scene.load.image('floor_1', '/assets/floor_1.png');
             scene.load.image('sand1', '/assets/sand1.png');
             scene.load.image('stone1', '/assets/stone1.png');
+            scene.load.image('mossy1', '/assets/mossy1.png');
             // Load sound effects
             scene.load.audio('walking', '/assets/walking.mp3');
             scene.load.audio('bookCollect', '/assets/book.mp3');
@@ -106,8 +107,10 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 tileKey = 'floor_1';
             } else if (currentLevel === 2) {
                 tileKey = 'sand1';
+            } else if (currentLevel === 3) {
+                tileKey = 'stone1';
             } else {
-                tileKey = 'stone1'; // Level 3 and 4
+                tileKey = 'mossy1'; // Level 4
             }
             
             // Get tile dimensions (assuming square tiles)
