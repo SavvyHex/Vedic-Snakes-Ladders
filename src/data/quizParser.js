@@ -2,7 +2,7 @@
 export async function loadQuizQuestions() {
     try {
         console.log('Loading quiz questions from JSON...');
-        const response = await fetch('/assets/quizQuestions.json');
+        const response = await fetch('/assets/data/quizQuestions.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }

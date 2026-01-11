@@ -65,7 +65,7 @@ export default function App() {
   // Setup background music
   useEffect(() => {
     if (!audioRef.current) {
-      audioRef.current = new Audio('/assets/bgm.mp3');
+      audioRef.current = new Audio('/assets/audio/bgm.mp3');
       audioRef.current.loop = true;
       audioRef.current.volume = 0.5;
       
@@ -82,7 +82,7 @@ export default function App() {
     
     // Initialize door sound effect
     if (!doorSoundRef.current) {
-      doorSoundRef.current = new Audio('/assets/door.mp3');
+      doorSoundRef.current = new Audio('/assets/audio/door.mp3');
       doorSoundRef.current.volume = 0.7;
     }
     

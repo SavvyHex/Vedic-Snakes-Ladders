@@ -65,27 +65,27 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
         function preload() {
             const scene = this;
             // Load the walking spritesheet
-            scene.load.spritesheet('walking', '/assets/walking.png', {
+            scene.load.spritesheet('walking', '/assets/sprites/walking.png', {
                 frameWidth: 64,
                 frameHeight: 64
             });
             // Load the idle spritesheet
-            scene.load.spritesheet('idle', '/assets/idle.png', {
+            scene.load.spritesheet('idle', '/assets/sprites/idle.png', {
                 frameWidth: 64,
                 frameHeight: 64
             });
             // Load the book sprite
-            scene.load.image('book', '/assets/book.png');
+            scene.load.image('book', '/assets/sprites/book.png');
             // Load door sprite
-            scene.load.image('door', '/assets/door.png');
+            scene.load.image('door', '/assets/sprites/door.png');
             // Load tilemap tiles
-            scene.load.image('floor_1', '/assets/floor_1.png');
-            scene.load.image('sand1', '/assets/sand1.png');
-            scene.load.image('stone1', '/assets/stone1.png');
-            scene.load.image('mossy1', '/assets/mossy1.png');
+            scene.load.image('floor_1', '/assets/sprites/floor_1.png');
+            scene.load.image('sand1', '/assets/sprites/sand1.png');
+            scene.load.image('stone1', '/assets/sprites/stone1.png');
+            scene.load.image('mossy1', '/assets/sprites/mossy1.png');
             // Load sound effects
-            scene.load.audio('walking', '/assets/walking.mp3');
-            scene.load.audio('bookCollect', '/assets/book.mp3');
+            scene.load.audio('walking', '/assets/audio/walking.mp3');
+            scene.load.audio('bookCollect', '/assets/audio/book.mp3');
         }
 
         function create() {
