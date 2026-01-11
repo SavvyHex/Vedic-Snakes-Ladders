@@ -157,7 +157,10 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             cursors = scene.input.keyboard.createCursorKeys()
 
             // --- COLLISIONS ---
-            // 1. Collect Veda
+            // 1. Player collides with gate (can't walk through)
+            scene.physics.add.collider(player, gate);
+            
+            // 2. Collect Veda
             scene.physics.add.overlap(player, vedasGroup, (p, v) => {
                 // Only collect if book hasn't been collected yet
                 if (v.body.enable === false) return;
@@ -172,7 +175,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 if(onCollectVeda) onCollectVeda(v.getData('id'));
             }, null, scene)
 
-            // Note: Gate collision now checked in update() function
+            // Note: Gate overlap now checked in update() function
         }
 
         function update() {
