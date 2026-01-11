@@ -10,7 +10,6 @@ export default function App() {
   const [restartKey, setRestartKey] = useState(0); // Key to force game restart
   const [quizQuestions, setQuizQuestions] = useState({}); // All quiz questions loaded from file
   const [answeredBooks, setAnsweredBooks] = useState([]); // Track which books have been answered correctly
-  const [collectedBooks, setCollectedBooks] = useState([]); // Track which books have been collected (touched)
   const [currentBookIndex, setCurrentBookIndex] = useState(null); // Which book was just collected
   const [currentQuestion, setCurrentQuestion] = useState(null); // Current question being asked
   const [penaltyBooks, setPenaltyBooks] = useState(0); // Extra books needed due to wrong answers
@@ -20,7 +19,6 @@ export default function App() {
   // Use refs to store the latest values for use in Phaser callbacks
   const quizQuestionsRef = useRef({});
   const answeredBooksRef = useRef([]);
-  const collectedBooksRef = useRef([]);
   const currentLevelRef = useRef(currentLevel);
   const usedQuestionIndicesRef = useRef([]);
 
@@ -32,10 +30,6 @@ export default function App() {
   useEffect(() => {
     answeredBooksRef.current = answeredBooks;
   }, [answeredBooks]);
-
-  useEffect(() => {
-    collectedBooksRef.current = collectedBooks;
-  }, [collectedBooks]);
 
   useEffect(() => {
     currentLevelRef.current = currentLevel;
@@ -77,34 +71,24 @@ export default function App() {
     console.log('Book collected:', bookIndex);
     console.log('Answered books:', answeredBooksRef.current);
     console.log('Quiz questions available:', quizQuestionsRef.current);
-    console.log('Type of quizQuestions:', typeof quizQuestionsRef.current);
-    const keys = Object.keys(quizQuestionsRef.current);
-    console.log('Keys array:', keys);
-    console.log('Keys length:', keys.length);
-    console.log('Is quizQuestions empty?', keys.length === 0);
     
     // Check if quiz questions are loaded yet
+    const keys = Object.keys(quizQuestionsRef.current);
     if (!quizQuestionsRef.current || keys.length === 0) {
       console.error('Quiz questions not loaded yet!');
       alert('Please wait for quiz questions to load...');
       return;
     }
     
-    // Check if this book has already been collected (touched)
-    if (collectedBooksRef.current.includes(bookIndex)) {
-      console.log('Book already collected, skipping');
-      return; // Already collected, don't show quiz again 
+    // Check if this book has already been answered (prevent double-answering)
+    if (answeredBooksRef.current.includes(bookIndex)) {
+      console.log('Book already answered, skipping');
+      return; // Already answered, don't show quiz again 
     }
-
-    // Mark as collected immediately
-    setCollectedBooks(prev => [...prev, bookIndex]);
 
     // Get a question for this book (convert level to string for key access)
     const levelKey = String(currentLevelRef.current);
-    console.log('Looking for level key:', levelKey);
-    console.log('Available keys:', Object.keys(quizQuestionsRef.current));
     const levelQuestions = quizQuestionsRef.current[levelKey];
-    console.log('Current level:', currentLevelRef.current, 'Level questions:', levelQuestions);
     
     if (levelQuestions && levelQuestions.length > 0) {
       // Get available questions that haven't been used yet
@@ -190,17 +174,21 @@ export default function App() {
     setShowQuiz(false);
     setScore(0);
     setAnsweredBooks([]);
-    setCollectedBooks([]);
     setCurrentQuestion(null);
     setCurrentBookIndex(null);
     setPenaltyBooks(0);
     setUsedQuestionIndices([]);
     
-    // Check if next level has questions
+    // Check if next level has questions (use ref to get latest data)
     const nextLevel = currentLevel + 1;
-    if (quizQuestions[String(nextLevel)] && quizQuestions[String(nextLevel)].length > 0) {
+    console.log('Checking for next level:', nextLevel);
+    console.log('Available levels:', Object.keys(quizQuestionsRef.current));
+    
+    if (quizQuestionsRef.current[String(nextLevel)] && quizQuestionsRef.current[String(nextLevel)].length > 0) {
+        console.log('Advancing to level', nextLevel);
         setCurrentLevel(nextLevel);
     } else {
+        console.log('No more levels available');
         alert("You have completed all available levels!");
         setCurrentLevel(1); // Loop back to start
     }
@@ -212,7 +200,7 @@ export default function App() {
       {/* GAME AREA */}
       <div>
         <h2 style={{ color: '#ffd700', fontFamily: 'monospace' }}>
-          Level {currentLevel} - Books: {collectedBooks.length} collected | Correct: {answeredBooks.length}/{totalBooksRequired}
+          Level {currentLevel} - Correct: {answeredBooks.length}/{totalBooksRequired}
           {penaltyBooks > 0 && <span style={{ color: '#ff6b6b', marginLeft: '10px' }}>(+{penaltyBooks} penalty)</span>}
         </h2>
         {/* We pass the level and handlers down to the game */}
@@ -222,7 +210,6 @@ export default function App() {
           onReachGate={handleReachGate}
           isQuizActive={showQuiz}
           restartKey={restartKey}
-          answeredBooksCount={collectedBooks.length}
           correctAnswersCount={answeredBooks.length}
           totalBooksRequired={totalBooksRequired}
         />
