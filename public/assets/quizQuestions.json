@@ -1,18 +1,3138 @@
 {
   "1": [
-    {"number": 1, "question": "According to the teachings, which path is recommended to remove 'mala' (impurity)?", "options": [{"letter": "A", "text": "Bhakti Marga (Path of Devotion)"}, {"letter": "B", "text": "Jnana Marga (Path of Knowledge)"}, {"letter": "C", "text": "Karma Marga (Path of Action)"}, {"letter": "D", "text": "Raja Yoga"}], "answer": "C"},
-    {"number": 2, "question": "What analogy is used to describe the effect of 'mala' on the mind?", "options": [{"letter": "A", "text": "A locked treasure chest"}, {"letter": "B", "text": "Dust accumulating on a mirror"}, {"letter": "C", "text": "A river blocked by stones"}, {"letter": "D", "text": "A lamp covered by a basket"}], "answer": "B"},
-    {"number": 3, "question": "Which of the following is a solution for 'vikshepa' (mental wavering) as per the teachings?", "options": [{"letter": "A", "text": "Fasting"}, {"letter": "B", "text": "Steady application in worship and adoration (Upasana/Bhakti)"}, {"letter": "C", "text": "Physical exercise"}, {"letter": "D", "text": "Charity"}], "answer": "B"},
-    {"number": 4, "question": "Which of the following best describes 'Avarana'?", "options": [{"letter": "A", "text": "The wavering of the mind"}, {"letter": "B", "text": "The veil that hides the reality of the Self"}, {"letter": "C", "text": "The accumulation of good karma"}, {"letter": "D", "text": "The process of meditation"}], "answer": "B"},
-    {"number": 5, "question": "The end of education is", "options": [{"letter": "A", "text": "Knowledge"}, {"letter": "B", "text": "Power"}, {"letter": "C", "text": "Character"}, {"letter": "D", "text": "Money"}], "answer": "C"}
+    {
+      "number": 1,
+      "question": "According to the teachings, which path is recommended to remove ‘mala’ (impurity)?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Bhakti Marga (Path of Devotion)"
+        },
+        {
+          "letter": "B",
+          "text": "Jnana Marga (Path of Knowledge)"
+        },
+        {
+          "letter": "C",
+          "text": "Karma Marga (Path of Action)"
+        },
+        {
+          "letter": "D",
+          "text": "Raja Yoga"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 2,
+      "question": "What analogy is used to describe the effect of ‘mala’ on the mind?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A locked treasure chest"
+        },
+        {
+          "letter": "B",
+          "text": "Dust accumulating on a mirror"
+        },
+        {
+          "letter": "C",
+          "text": "A river blocked by stones"
+        },
+        {
+          "letter": "D",
+          "text": "A lamp covered by a basket"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 3,
+      "question": "Which of the following is a solution for ‘vikshepa’ (mental wavering) as per the teachings?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Fasting"
+        },
+        {
+          "letter": "B",
+          "text": "Steady application in worship and adoration (Upasana/Bhakti)"
+        },
+        {
+          "letter": "C",
+          "text": "Physical exercise"
+        },
+        {
+          "letter": "D",
+          "text": "Charity"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 4,
+      "question": "Which of the following best describes ‘Avarana’?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "The wavering of the mind"
+        },
+        {
+          "letter": "B",
+          "text": "The veil that hides the reality of the Self"
+        },
+        {
+          "letter": "C",
+          "text": "The accumulation of good karma"
+        },
+        {
+          "letter": "D",
+          "text": "The process of meditation"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 5,
+      "question": "The end of education is",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Knowledge"
+        },
+        {
+          "letter": "B",
+          "text": "Power"
+        },
+        {
+          "letter": "C",
+          "text": "Character"
+        },
+        {
+          "letter": "D",
+          "text": "Money"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 6,
+      "question": "What is the true meaning of “surrender” (sharanagathi) in Vedic living?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Giving up all work"
+        },
+        {
+          "letter": "B",
+          "text": "Seeing God everywhere and performing all duties as an offering to God"
+        },
+        {
+          "letter": "C",
+          "text": "Renouncing family life"
+        },
+        {
+          "letter": "D",
+          "text": "Practicing only meditation"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 7,
+      "question": "Which of the following is a key difference between charity and sacrifice as explained by Swami?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Charity is always selfless"
+        },
+        {
+          "letter": "B",
+          "text": "Sacrifice means giving what you love most, without selfishness"
+        },
+        {
+          "letter": "C",
+          "text": "Charity is discouraged"
+        },
+        {
+          "letter": "D",
+          "text": "Sacrifice is only for monks"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 8,
+      "question": "Which of the following is NOT listed as a virtue to be cultivated for strengthening Vedic living?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Self-control"
+        },
+        {
+          "letter": "B",
+          "text": "Non-stealing"
+        },
+        {
+          "letter": "C",
+          "text": "Greed"
+        },
+        {
+          "letter": "D",
+          "text": "Patience"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 9,
+      "question": "A friend is feeling jealous of a colleague’s success and asks for your advice based on Vedic values. Which of the following should you highlight as an obstacle to spiritual progress?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Loba"
+        },
+        {
+          "letter": "B",
+          "text": "Matsarya"
+        },
+        {
+          "letter": "C",
+          "text": "Mada"
+        },
+        {
+          "letter": "D",
+          "text": "Kama"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 10,
+      "question": "What is the main spiritual fruit of following the disciplines of Brahmacharya Āśrama?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Fame"
+        },
+        {
+          "letter": "B",
+          "text": "Self-control, inner purity, and constant God-awareness"
+        },
+        {
+          "letter": "C",
+          "text": "Physical strength"
+        },
+        {
+          "letter": "D",
+          "text": "Wealth"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 11,
+      "question": "What is the purpose of chanting the Gayatri Mantra in the Brahmacharya stage?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "To impress others"
+        },
+        {
+          "letter": "B",
+          "text": "To purify the mind and intellect and protect the life force"
+        },
+        {
+          "letter": "C",
+          "text": "To become wealthy"
+        },
+        {
+          "letter": "D",
+          "text": "To win competitions"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 12,
+      "question": "Which of the following is emphasized as the foremost duty of a student in the Brahmacharya stage?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Winning awards"
+        },
+        {
+          "letter": "B",
+          "text": "Respecting parents"
+        },
+        {
+          "letter": "C",
+          "text": "Traveling abroad"
+        },
+        {
+          "letter": "D",
+          "text": "Practicing sports"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 13,
+      "question": "What is the spiritual significance of eating sāthwic (pure) food in Brahmacharya Āśrama?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It is a family tradition"
+        },
+        {
+          "letter": "B",
+          "text": "The subtlest part of food becomes the mind, influencing thoughts and character"
+        },
+        {
+          "letter": "C",
+          "text": "It is only for health"
+        },
+        {
+          "letter": "D",
+          "text": "It is a festival requirement"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "question": "What is the significance of Yajnas in the life of a householder?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Yajnas are designed to lead one to the One who is unchanging and eternal"
+        },
+        {
+          "letter": "B",
+          "text": "Yajnas are performed to accumulate wealth"
+        },
+        {
+          "letter": "C",
+          "text": "Yajnas are rituals to honor only the deities"
+        },
+        {
+          "letter": "D",
+          "text": "Yajnas are performed to gain social status"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 15,
+      "question": "What are the six daily duties of a Grihastha?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Snaanam, Sandhya, Japam, Homam, Puja, and Atithi Satkaram"
+        },
+        {
+          "letter": "B",
+          "text": "Snaanam, Sandhya, Japam, Homam, Puja, and Yoga"
+        },
+        {
+          "letter": "C",
+          "text": "Snaanam, Sandhya, Dhyanam, Homam, Puja, and Atithi Satkaram"
+        },
+        {
+          "letter": "D",
+          "text": "Snaanam, Sandhya, Japam, Homam, Puja, and Daana"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 16,
+      "question": "What does the term \"grihastha\" mean ?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Being married and living with the wife and children"
+        },
+        {
+          "letter": "B",
+          "text": "Treating all with equal consideration, gaining awareness of the world, acquainting oneself with the shastras, and fostering and protecting one's family with a sense of responsibility"
+        },
+        {
+          "letter": "C",
+          "text": "Living alone and practicing asceticism"
+        },
+        {
+          "letter": "D",
+          "text": "Accumulating wealth and material possessions"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 17,
+      "question": "What is the purpose of Pitru Yajna?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "To honor the sages"
+        },
+        {
+          "letter": "B",
+          "text": "To atone for offences committed against other beings"
+        },
+        {
+          "letter": "C",
+          "text": "To propitiate the ancestors"
+        },
+        {
+          "letter": "D",
+          "text": "To worship the deities"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "question": "What is the significance of Rishi Yajna?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "To offer food to animals"
+        },
+        {
+          "letter": "B",
+          "text": "To meditate on and offer worship to the sages"
+        },
+        {
+          "letter": "C",
+          "text": "To perform rituals for the deities"
+        },
+        {
+          "letter": "D",
+          "text": "To provide shelter for lower beings"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 19,
+      "question": "What is the purpose of Bhoota Yajna?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "To honor the ancestors"
+        },
+        {
+          "letter": "B",
+          "text": "To offer food to the deities"
+        },
+        {
+          "letter": "C",
+          "text": "To atone for the death of small creatures"
+        },
+        {
+          "letter": "D",
+          "text": "To meditate on the sages"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 20,
+      "question": "What is the role of Deva Yajna?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "To propitiate various deities"
+        },
+        {
+          "letter": "B",
+          "text": "To offer food to animals"
+        },
+        {
+          "letter": "C",
+          "text": "To honor the ancestors"
+        },
+        {
+          "letter": "D",
+          "text": "To meditate on the sages"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 30,
+      "question": "According to Swami, true Vānaprastha is characterized more by:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "External symbols"
+        },
+        {
+          "letter": "B",
+          "text": "Forest dwelling"
+        },
+        {
+          "letter": "C",
+          "text": "Inner renunciation"
+        },
+        {
+          "letter": "D",
+          "text": "Social invisibility"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 31,
+      "question": "Swami often emphasized that attachment during Vānaprastha should be replaced by:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Indifference"
+        },
+        {
+          "letter": "B",
+          "text": "Neglect"
+        },
+        {
+          "letter": "C",
+          "text": "Love without possessiveness"
+        },
+        {
+          "letter": "D",
+          "text": "Complete withdrawal"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 32,
+      "question": "Which āśrama is Vānaprastha explicitly meant to prepare one for?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Brahmacarya"
+        },
+        {
+          "letter": "B",
+          "text": "Gṛhastha"
+        },
+        {
+          "letter": "C",
+          "text": "Sannyāsa"
+        },
+        {
+          "letter": "D",
+          "text": "None"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 34,
+      "question": "According to the Upaniṣhads, the essence of Sannyāsa is:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "External renunciation"
+        },
+        {
+          "letter": "B",
+          "text": "Ritual abandonment"
+        },
+        {
+          "letter": "C",
+          "text": "Knowledge of the Self"
+        },
+        {
+          "letter": "D",
+          "text": "Forest isolation"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 36,
+      "question": "Which practice is central to the life of a Sannyāsin?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Performance of yajñas"
+        },
+        {
+          "letter": "B",
+          "text": "Accumulation of merit"
+        },
+        {
+          "letter": "C",
+          "text": "Study, contemplation, and realization of Brahman"
+        },
+        {
+          "letter": "D",
+          "text": "Social service"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 37,
+      "question": "A true Sannyāsin is expected to give up:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Family only"
+        },
+        {
+          "letter": "B",
+          "text": "Wealth only"
+        },
+        {
+          "letter": "C",
+          "text": "Ritual fires only"
+        },
+        {
+          "letter": "D",
+          "text": "Sense of doership and ownership"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 38,
+      "question": "In the Upaniṣhads, the Sannyāsin is often described as one who:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Performs no duties"
+        },
+        {
+          "letter": "B",
+          "text": "Has transcended duality"
+        },
+        {
+          "letter": "C",
+          "text": "Rejects all learning"
+        },
+        {
+          "letter": "D",
+          "text": "Avoids teaching"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 39,
+      "question": "Which statement best reflects the Sannyāsa ideal?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Renunciation of wealth guarantees liberation"
+        },
+        {
+          "letter": "B",
+          "text": "Knowledge without discipline is sufficient"
+        },
+        {
+          "letter": "C",
+          "text": "Inner renunciation is superior to external renunciation"
+        },
+        {
+          "letter": "D",
+          "text": "Solitude alone leads to Mokṣa"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 40,
+      "question": "Sannyāsa represents which path predominantly?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Karma Yoga"
+        },
+        {
+          "letter": "B",
+          "text": "Bhakti Yoga"
+        },
+        {
+          "letter": "C",
+          "text": "Jñāna Yoga"
+        },
+        {
+          "letter": "D",
+          "text": "Rāja Yoga"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 41,
+      "question": "The Mahāvākyas are mainly associated with which school of philosophy?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Dvaita"
+        },
+        {
+          "letter": "B",
+          "text": "Viśiṣṭādvaita"
+        },
+        {
+          "letter": "C",
+          "text": "Advaita Vedānta"
+        },
+        {
+          "letter": "D",
+          "text": "Sāṅkhya"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 42,
+      "question": "In the āśrama system, Sannyāsa ultimately signifies:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "End of social life"
+        },
+        {
+          "letter": "B",
+          "text": "End of ritual duties"
+        },
+        {
+          "letter": "C",
+          "text": "Fulfillment of human birth"
+        },
+        {
+          "letter": "D",
+          "text": "Withdrawal from responsibility"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 43,
+      "question": "Mahāvākyas occur primarily in:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Brāhmaṇas"
+        },
+        {
+          "letter": "B",
+          "text": "Āraṇyakas"
+        },
+        {
+          "letter": "C",
+          "text": "Upaniṣhads"
+        },
+        {
+          "letter": "D",
+          "text": "Smṛtis"
+        }
+      ],
+      "answer": "C"
+    }
   ],
   "2": [
-    {"number": 1, "question": "What is the main purpose of spiritual practice?", "options": [{"letter": "A", "text": "To gain worldly success"}, {"letter": "B", "text": "To know oneself"}, {"letter": "C", "text": "To impress others"}, {"letter": "D", "text": "To avoid responsibilities"}], "answer": "B"}
+    {
+      "number": 1,
+      "question": "According to the teachings, what is the ultimate way to overcome all obstacles in the journey to the Divine?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Accumulating wealth"
+        },
+        {
+          "letter": "B",
+          "text": "Understanding and resolving the three core problems of the mind"
+        },
+        {
+          "letter": "C",
+          "text": "Practicing yoga postures"
+        },
+        {
+          "letter": "D",
+          "text": "Reading scriptures daily"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 2,
+      "question": "Which quote from Swami is used to summarize the solution to the three obstacles?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "“Love is the medicine and God’s injunctions are the diet restrictions.”"
+        },
+        {
+          "letter": "B",
+          "text": "“Time waste is life waste.”"
+        },
+        {
+          "letter": "C",
+          "text": "“Help ever, hurt never.”"
+        },
+        {
+          "letter": "D",
+          "text": "“Work is worship.”"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 3,
+      "question": "You are organizing a cultural event and want to include a Vedic chanting session. Some participants suggest learning mantras from online videos. what is the best approach?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Allow everyone to learn from any source they like"
+        },
+        {
+          "letter": "B",
+          "text": "Encourage learning from a qualified teacher to ensure correct pronunciation"
+        },
+        {
+          "letter": "C",
+          "text": "Skip the chanting session"
+        },
+        {
+          "letter": "D",
+          "text": "Let only elders chant"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 4,
+      "question": "Your community wants to use Vedic mantras for environmental well-being. What is the effect of chanting Vedic mantras?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Only benefits the person chanting"
+        },
+        {
+          "letter": "B",
+          "text": "Has no effect"
+        },
+        {
+          "letter": "C",
+          "text": "Benefits both the individual and the environment"
+        },
+        {
+          "letter": "D",
+          "text": "Is not allowed"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 6,
+      "question": "What is the significance of the oral tradition in preserving the Vedas?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It was used because writing was not invented"
+        },
+        {
+          "letter": "B",
+          "text": "It ensured accuracy and purity through teacher-student transmission"
+        },
+        {
+          "letter": "C",
+          "text": "It was only for entertainment"
+        },
+        {
+          "letter": "D",
+          "text": "It was a temporary method"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 7,
+      "question": "What is the analogy used for the balance of Karma, Bhakti, and Jnana in spiritual progress?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A tree with deep roots"
+        },
+        {
+          "letter": "B",
+          "text": "A bird with two wings and a tail"
+        },
+        {
+          "letter": "C",
+          "text": "A river flowing to the sea"
+        },
+        {
+          "letter": "D",
+          "text": "A mountain peak"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 8,
+      "question": "Which practice is essential for transcending the three gunas (Satwa, Rajas, Tamas) in daily life?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Accumulating wealth"
+        },
+        {
+          "letter": "B",
+          "text": "Service to the Divine, devotion, and detachment"
+        },
+        {
+          "letter": "C",
+          "text": "Ritual fasting"
+        },
+        {
+          "letter": "D",
+          "text": "Memorizing scriptures"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 9,
+      "question": "What is the correct sequence of the four pillars of Vedic discipline as per Swami?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Peace, Love, Truth, Righteousness"
+        },
+        {
+          "letter": "B",
+          "text": "Truth, Righteousness, Peace, Love"
+        },
+        {
+          "letter": "C",
+          "text": "Love, Peace, Righteousness, Truth"
+        },
+        {
+          "letter": "D",
+          "text": "Righteousness, Truth, Love, Peace"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 10,
+      "question": "Which of the following is a key takeaway for students completing Brahmacharya Āśrama and entering the next stage?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Forget spiritual practices"
+        },
+        {
+          "letter": "B",
+          "text": "Continue to practice truth, virtue, and respect for parents and teachers"
+        },
+        {
+          "letter": "C",
+          "text": "Focus only on career"
+        },
+        {
+          "letter": "D",
+          "text": "Stop chanting mantras"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 12,
+      "question": "What is the spiritual fruit of practicing unity of thought, word, and deed (Trikarana Shuddhi) in Brahmacharya Āśrama?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Confusion"
+        },
+        {
+          "letter": "B",
+          "text": "Inner purity and progress towards God"
+        },
+        {
+          "letter": "C",
+          "text": "Physical strength"
+        },
+        {
+          "letter": "D",
+          "text": "Material success"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 14,
+      "question": "Swami says “For you, the _________ and ________ rites, three times a day, will act as the ‘tin’ for the ह्र्दय पात्र (Hrdaya pātra -the heart-vessel).” Bath and Puja",
+      "options": [
+        {
+          "letter": "B",
+          "text": "Sandhya and Puja"
+        },
+        {
+          "letter": "C",
+          "text": "Gayatri and Sandhya"
+        },
+        {
+          "letter": "D",
+          "text": "Gayatri and Puja"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "question": "A manager must choose between increasing profits through layoffs or retaining employees at the cost of reduced margins. Which approach best reflects Gṛhastha Dharma?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Lay off employees immediately to protect shareholders"
+        },
+        {
+          "letter": "B",
+          "text": "Ignore profits entirely"
+        },
+        {
+          "letter": "C",
+          "text": "Seek a balanced solution that minimizes harm while sustaining the organization"
+        },
+        {
+          "letter": "D",
+          "text": "Resign to avoid moral conflict"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 19,
+      "question": "Which statement best summarizes Gṛhastha Dharma in professional life?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Career success is superior to spiritual growth"
+        },
+        {
+          "letter": "B",
+          "text": "Professional life is an obstacle to liberation"
+        },
+        {
+          "letter": "C",
+          "text": "Work is a means of social service and inner purification"
+        },
+        {
+          "letter": "D",
+          "text": "Only renunciation leads to spiritual progress"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 20,
+      "question": "A Gṛhastha professional encounters corruption normalized in the workplace. What is the most dhārmic response?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Participate to remain competitive"
+        },
+        {
+          "letter": "B",
+          "text": "Remain silent to protect one’s position"
+        },
+        {
+          "letter": "C",
+          "text": "Refuse participation and act with moral courage"
+        },
+        {
+          "letter": "D",
+          "text": "Quit immediately without reflection"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 21,
+      "question": "How does Gṛhastha Dharma view competition in professional life?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As inherently unethical"
+        },
+        {
+          "letter": "B",
+          "text": "As justification for harming others"
+        },
+        {
+          "letter": "C",
+          "text": "As acceptable when governed by fairness and Dharma"
+        },
+        {
+          "letter": "D",
+          "text": "As superior to cooperation"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 22,
+      "question": "A Gṛhastha professional practices excellence at work even when unobserved. This reflects which dhārmic ideal?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Desire for recognition"
+        },
+        {
+          "letter": "B",
+          "text": "Fear of punishment"
+        },
+        {
+          "letter": "C",
+          "text": "Inner accountability and integrity"
+        },
+        {
+          "letter": "D",
+          "text": "Ritualistic morality"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 23,
+      "question": "Professional work becomes spiritually elevating for a Gṛhastha when it is:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Highly profitable"
+        },
+        {
+          "letter": "B",
+          "text": "Socially prestigious"
+        },
+        {
+          "letter": "C",
+          "text": "Performed as yajña (offering)"
+        },
+        {
+          "letter": "D",
+          "text": "Detached from society"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 24,
+      "question": "Which leadership approach aligns most closely with Swamis teachings?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Authoritarian leadership"
+        },
+        {
+          "letter": "B",
+          "text": "Transactional leadership"
+        },
+        {
+          "letter": "C",
+          "text": "Servant leadership"
+        },
+        {
+          "letter": "D",
+          "text": "Competitive leadership"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 25,
+      "question": "Swami emphasized that a leader should first:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Reform society"
+        },
+        {
+          "letter": "B",
+          "text": "Reform the organization"
+        },
+        {
+          "letter": "C",
+          "text": "Reform oneself"
+        },
+        {
+          "letter": "D",
+          "text": "Reform laws"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 26,
+      "question": "Which set of values was repeatedly emphasized by Swami as essential for human excellence and leadership? Discipline, obedience, efficiency",
+      "options": [
+        {
+          "letter": "B",
+          "text": "Truth, righteousness, peace, love, non-violence"
+        },
+        {
+          "letter": "C",
+          "text": "Courage, ambition, innovation"
+        },
+        {
+          "letter": "D",
+          "text": "Faith, ritual, devotion"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 28,
+      "question": "IT / Software Industry – Data Ethics A senior software engineer is asked to design an algorithm that legally collects user data but intentionally nudges users into addictive behavior, increasing company revenue. What is the most dhārmic course of action?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Implement it fully, as it is legal"
+        },
+        {
+          "letter": "B",
+          "text": "Implement it but distance oneself emotionally"
+        },
+        {
+          "letter": "C",
+          "text": "Raise ethical concerns and seek a less harmful design"
+        },
+        {
+          "letter": "D",
+          "text": "Resign immediately without attempting reform"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 29,
+      "question": "Medicine – Patient Welfare vs Profit A hospital doctor is pressured to prescribe unnecessary tests because they generate revenue for the institution. According to Gṛhastha Dharma, the doctor should:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Comply to protect job security"
+        },
+        {
+          "letter": "B",
+          "text": "Prescribe selectively while meeting quotas"
+        },
+        {
+          "letter": "C",
+          "text": "Refuse unnecessary procedures and prioritize patient welfare"
+        },
+        {
+          "letter": "D",
+          "text": "Leave clinical practice entirely"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 30,
+      "question": "Corporate Leadership – Downsizing A CEO must decide whether to automate operations, increasing profits but rendering many loyal employees jobless. What best reflects dhārmic leadership?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Maximize shareholder value without concern"
+        },
+        {
+          "letter": "B",
+          "text": "Reject automation entirely"
+        },
+        {
+          "letter": "C",
+          "text": "Implement change gradually with retraining and support"
+        },
+        {
+          "letter": "D",
+          "text": "Transfer responsibility to middle management"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 31,
+      "question": "Civil Services – Political Pressure A civil servant is instructed by a superior to bypass rules for political convenience, though the act harms public interest. The dhārmic response is to:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Obey orders unquestioningly"
+        },
+        {
+          "letter": "B",
+          "text": "Delay action silently"
+        },
+        {
+          "letter": "C",
+          "text": "Uphold Dharma by resisting and documenting dissent"
+        },
+        {
+          "letter": "D",
+          "text": "Resign immediately"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 32,
+      "question": "Legal Profession – Truth vs Client Interest A lawyer realizes that defending a client aggressively will suppress truth though legally permissible. What aligns with Gṛhastha Dharma?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Win the case at any cost"
+        },
+        {
+          "letter": "B",
+          "text": "Withdraw from the case citing ethical conflict"
+        },
+        {
+          "letter": "C",
+          "text": "Argue within ethical limits without distorting justice"
+        },
+        {
+          "letter": "D",
+          "text": "Follow client instructions strictly"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 33,
+      "question": "Business – Supply Chain Ethics A business owner can significantly reduce costs by sourcing materials from vendors known for labor exploitation. According to Gṛhastha Dharma, the owner should:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Choose the cheapest option"
+        },
+        {
+          "letter": "B",
+          "text": "Ignore indirect responsibility"
+        },
+        {
+          "letter": "C",
+          "text": "Select ethical suppliers even at higher cost"
+        },
+        {
+          "letter": "D",
+          "text": "Compensate by donating profits"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 34,
+      "question": "Consequence vs Intention A manager takes a well-intentioned ethical decision that results in significant organizational loss and job cuts. From a dhārmic perspective, the action is best evaluated by:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Outcomes alone"
+        },
+        {
+          "letter": "B",
+          "text": "Intent alone"
+        },
+        {
+          "letter": "C",
+          "text": "Alignment of intention, process, and discernment"
+        },
+        {
+          "letter": "D",
+          "text": "Organizational approval"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 35,
+      "question": "Means vs Ends in Social Good A professional justifies unethical shortcuts because the final outcome benefits society at large. According to Dharma, this reasoning is:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Valid if benefits outweigh harm"
+        },
+        {
+          "letter": "B",
+          "text": "Acceptable in emergencies"
+        },
+        {
+          "letter": "C",
+          "text": "Fundamentally flawed, as means shape moral outcome"
+        },
+        {
+          "letter": "D",
+          "text": "Irrelevant in professional life"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 36,
+      "question": "According to Swami, one of the main dangers during Vānaprastha is:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Physical weakness"
+        },
+        {
+          "letter": "B",
+          "text": "Excessive ritualism"
+        },
+        {
+          "letter": "C",
+          "text": "Hypocrisy—external renunciation without inner change"
+        },
+        {
+          "letter": "D",
+          "text": "Lack of scriptural knowledge"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 37,
+      "question": "In Swamis view, the role of a Vānaprastha in society is to:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Seek solitude exclusively"
+        },
+        {
+          "letter": "B",
+          "text": "Accumulate merit through rituals"
+        },
+        {
+          "letter": "C",
+          "text": "Serve as a moral and spiritual example"
+        },
+        {
+          "letter": "D",
+          "text": "Avoid social engagement"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 38,
+      "question": "The ultimate aim of Vānaprastha is to:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Escape worldly suffering"
+        },
+        {
+          "letter": "B",
+          "text": "Prepare the mind for Sannyāsa"
+        },
+        {
+          "letter": "C",
+          "text": "Gain social respect"
+        },
+        {
+          "letter": "D",
+          "text": "Perfect ritual knowledge"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 39,
+      "question": "simplicity in Vānaprastha is meant to:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Impress others"
+        },
+        {
+          "letter": "B",
+          "text": "Reject comfort"
+        },
+        {
+          "letter": "C",
+          "text": "Reduce ego and dependence"
+        },
+        {
+          "letter": "D",
+          "text": "Avoid society"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 40,
+      "question": "Which statement best summarizes Swamis teaching on Vānaprastha?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Renunciation begins only after Sannyāsa"
+        },
+        {
+          "letter": "B",
+          "text": "Vānaprastha is physical withdrawal from life"
+        },
+        {
+          "letter": "C",
+          "text": "Vānaprastha is inner detachment with outer responsibility"
+        },
+        {
+          "letter": "D",
+          "text": "Vānaprastha is optional in spiritual life"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 41,
+      "question": "The abandonment of ritual fires by a Sannyāsin symbolizes the shift from ________ to ________.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Bhakti → Karma"
+        },
+        {
+          "letter": "B",
+          "text": "Society → Solitude"
+        },
+        {
+          "letter": "C",
+          "text": "Karma → Jñāna"
+        },
+        {
+          "letter": "D",
+          "text": "Dharma → Artha"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 42,
+      "question": "The word Tat in “Tat Tvam Asi” refers to:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "The physical universe"
+        },
+        {
+          "letter": "B",
+          "text": "The individual ego"
+        },
+        {
+          "letter": "C",
+          "text": "Brahman, the ultimate reality"
+        },
+        {
+          "letter": "D",
+          "text": "The mind"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 43,
+      "question": "Seeking recognition or followers contradicts Sannyāsa because it strengthens ________.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Discipline"
+        },
+        {
+          "letter": "B",
+          "text": "Bhakti"
+        },
+        {
+          "letter": "C",
+          "text": "Ego-sense"
+        },
+        {
+          "letter": "D",
+          "text": "Knowledge"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 44,
+      "question": "A Sannyāsin remains calm whether praised or criticized and shows no preference for comfort or hardship. Which hallmark of true Sannyāsa is demonstrated here?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Physical endurance"
+        },
+        {
+          "letter": "B",
+          "text": "Emotional suppression"
+        },
+        {
+          "letter": "C",
+          "text": "Equanimity (Samatva)"
+        },
+        {
+          "letter": "D",
+          "text": "Ritual mastery"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 45,
+      "question": "A Sannyāsin who has transcended dualities such as pleasure and pain is said to possess ________.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Tapas"
+        },
+        {
+          "letter": "B",
+          "text": "Equanimity"
+        },
+        {
+          "letter": "C",
+          "text": "Silence"
+        },
+        {
+          "letter": "D",
+          "text": "Detachment"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 46,
+      "question": "A teacher tells a student, “Sannyāsa is not for those who run from problems but for those who have transcended desire.” What qualification for Sannyāsa is emphasized?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Age"
+        },
+        {
+          "letter": "B",
+          "text": "Social failure"
+        },
+        {
+          "letter": "C",
+          "text": "Dispassion (Vairāgya)"
+        },
+        {
+          "letter": "D",
+          "text": "Loneliness"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 47,
+      "question": "What is the significance of the number 21 in Omkara chanting at Prasanthi Nilayam?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It represents the 21 stages of life"
+        },
+        {
+          "letter": "B",
+          "text": "It purifies and clarifies the 20 components of the body and the mind"
+        },
+        {
+          "letter": "C",
+          "text": "It is a random number chosen for convenience"
+        },
+        {
+          "letter": "D",
+          "text": "It symbolizes the 21 days of meditation"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 48,
+      "question": "According to Swami, bath taken at what time is Manusha Snanam?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "5am-6am"
+        },
+        {
+          "letter": "B",
+          "text": "6am – 7am"
+        },
+        {
+          "letter": "C",
+          "text": "3am – 5am"
+        },
+        {
+          "letter": "D",
+          "text": "7am-8am"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 49,
+      "question": "According to Swami, bath taken at what time is Daiva Snanam?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "5am-6am"
+        },
+        {
+          "letter": "B",
+          "text": "6am – 7am"
+        },
+        {
+          "letter": "C",
+          "text": "3am – 5am"
+        },
+        {
+          "letter": "D",
+          "text": "7am-8am"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 50,
+      "question": "According to Swami, which are the times that have Sattvic quality in a day?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "4am – 8am"
+        },
+        {
+          "letter": "B",
+          "text": "4pm – 8pm"
+        },
+        {
+          "letter": "C",
+          "text": "Both A and B"
+        },
+        {
+          "letter": "D",
+          "text": "None of the above"
+        }
+      ],
+      "answer": "C"
+    }
   ],
   "3": [
-    {"number": 1, "question": "What is the foundation of ethics?", "options": [{"letter": "A", "text": "Personal gain"}, {"letter": "B", "text": "Social approval"}, {"letter": "C", "text": "Truth and compassion"}, {"letter": "D", "text": "Power"}], "answer": "C"}
+    {
+      "number": 2,
+      "question": "Why are both worldly and spiritual education essential for human life?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Worldly education ensures wealth, while spiritual education ensures fame."
+        },
+        {
+          "letter": "B",
+          "text": "Worldly education is for a living, while spiritual education is for life."
+        },
+        {
+          "letter": "C",
+          "text": "Worldly education teaches science, while spiritual education teaches religion."
+        },
+        {
+          "letter": "D",
+          "text": "Worldly education is temporary, while spiritual education is permanent."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 3,
+      "question": "What is the main limitation of the modern education system?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "It focuses only on spiritual education"
+        },
+        {
+          "letter": "B",
+          "text": "It ignores worldly education"
+        },
+        {
+          "letter": "C",
+          "text": "It gives prominence only to worldly education, neglecting spirituality"
+        },
+        {
+          "letter": "D",
+          "text": "It emphasizes discipline over creativity"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 4,
+      "question": "In the allegory of the monkey and the pot of nuts, what does the pot represent?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Sensory pleasures"
+        },
+        {
+          "letter": "B",
+          "text": "Human greed"
+        },
+        {
+          "letter": "C",
+          "text": "Nature (Prakriti)"
+        },
+        {
+          "letter": "D",
+          "text": "The true self (Atma)"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 5,
+      "question": "What is the meaning of the word “Mantra”?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "That which is sung"
+        },
+        {
+          "letter": "B",
+          "text": "That which is written"
+        },
+        {
+          "letter": "C",
+          "text": "That which saves when meditated upon"
+        },
+        {
+          "letter": "D",
+          "text": "That which is memorized"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 6,
+      "question": "The Yajur Veda is a repository of ___________, the Rig Veda holds the repository of ___________, and the Sama Veda embodies ____________.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Sound, spiritual formulae, light"
+        },
+        {
+          "letter": "B",
+          "text": "Spiritual formulae, light, sound"
+        },
+        {
+          "letter": "C",
+          "text": "Light, sound, spiritual formulae"
+        },
+        {
+          "letter": "D",
+          "text": "Light, spiritual formulae, sound"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 7,
+      "question": "There are three divisions representing the progressive stages in human spiritual evolution. Individuals begin with ______, recognizing that the human body is intended for achieving _______ through ______.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Actions, Dharma, Karma"
+        },
+        {
+          "letter": "B",
+          "text": "Actions, Karma, Dharma"
+        },
+        {
+          "letter": "C",
+          "text": "Dharma, Karma, Actions"
+        },
+        {
+          "letter": "D",
+          "text": "Karma, Dharma, Actions"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 8,
+      "question": "Collectively, Karma, Upāsana and Jñana can be viewed as three phases of a single process, akin to the ____, the _____ and the ____.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Flower, bitter fruit, sweet fruit"
+        },
+        {
+          "letter": "B",
+          "text": "Flower, Raw fruit, Ripe Fruit"
+        },
+        {
+          "letter": "C",
+          "text": "Waking, dreaming, deep sleep"
+        },
+        {
+          "letter": "D",
+          "text": "Standing, walking, running"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 9,
+      "question": "Sri Rudram occurs in which of the Vedas?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Rig Veda"
+        },
+        {
+          "letter": "B",
+          "text": "Krishna Yajur Veda"
+        },
+        {
+          "letter": "C",
+          "text": "Shukla Yajur Veda"
+        },
+        {
+          "letter": "D",
+          "text": "Sama Veda"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 10,
+      "question": "Purusha Suktam occurs in which of the Vedas?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Rig Veda"
+        },
+        {
+          "letter": "B",
+          "text": "Yajur Veda"
+        },
+        {
+          "letter": "C",
+          "text": "Sama Veda"
+        },
+        {
+          "letter": "D",
+          "text": "All the four Vedas"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 11,
+      "question": "The following are the tenets of Veda Chanting Except:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Svara"
+        },
+        {
+          "letter": "B",
+          "text": "Maatra"
+        },
+        {
+          "letter": "C",
+          "text": "Santanaha"
+        },
+        {
+          "letter": "D",
+          "text": "Laya"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 12,
+      "question": "Veda is also known as:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Shruthi and Anushrava"
+        },
+        {
+          "letter": "B",
+          "text": "Agama and Nigama"
+        },
+        {
+          "letter": "C",
+          "text": "Chandas and Swadhyaya"
+        },
+        {
+          "letter": "D",
+          "text": "Trayi and Amnaya"
+        },
+        {
+          "letter": "E",
+          "text": "All of the above"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 13,
+      "question": "“Daiva Preeti, Papa Bheeti, and Sangha Neeti” mean love for ______, fear of ______, and morality in ______.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Others, God, life"
+        },
+        {
+          "letter": "B",
+          "text": "God, death, life"
+        },
+        {
+          "letter": "C",
+          "text": "God, sin, society"
+        },
+        {
+          "letter": "D",
+          "text": "Everyone, God, society"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 14,
+      "question": "According to Swami, the ten virtues to be cultivated include self-control, non-stealing, supreme intellect, deep study of the Self, truth, self-control of the mind, purity, patience, perseverance, and ______.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Prema"
+        },
+        {
+          "letter": "B",
+          "text": "Bhakti"
+        },
+        {
+          "letter": "C",
+          "text": "Akrodha (no anger)"
+        },
+        {
+          "letter": "D",
+          "text": "Ahimsa"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 15,
+      "question": "A student says, “I am a good person and don’t harm anyone. Isn’t that enough for spiritual progress?” What is the next step beyond being “good” that you should recommend?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Focus only on personal happiness"
+        },
+        {
+          "letter": "B",
+          "text": "Broaden your heart and see Divinity in everyone"
+        },
+        {
+          "letter": "C",
+          "text": "Ignore others’ needs"
+        },
+        {
+          "letter": "D",
+          "text": "Practice only rituals"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 16,
+      "question": "गायत्री (Gayatri) is described as having ______ faces.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Three"
+        },
+        {
+          "letter": "B",
+          "text": "Four"
+        },
+        {
+          "letter": "C",
+          "text": "Five"
+        },
+        {
+          "letter": "D",
+          "text": "Six"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 17,
+      "question": "गायत्री (Gayatri) represents in these five faces the ____________.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Panch Bhutas"
+        },
+        {
+          "letter": "B",
+          "text": "Panchapranas"
+        },
+        {
+          "letter": "C",
+          "text": "Pancha Karmendriyas"
+        },
+        {
+          "letter": "D",
+          "text": "Panch Gnanendriyas"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 18,
+      "question": "When one’s speech is protected, the deity is called ____________.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Gayatri"
+        },
+        {
+          "letter": "B",
+          "text": "Saraswathi"
+        },
+        {
+          "letter": "C",
+          "text": "Medha Devi"
+        },
+        {
+          "letter": "D",
+          "text": "Savitri"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 19,
+      "question": "What is the benefit of chanting Gayatri regularly every day according to Swami?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Increases Karmic debt"
+        },
+        {
+          "letter": "B",
+          "text": "Reduces the effects of the wrong acts one does every day"
+        },
+        {
+          "letter": "C",
+          "text": "Gives peace of mind"
+        },
+        {
+          "letter": "D",
+          "text": "Helps with calming the mind"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 20,
+      "question": "“Matru devo bhava! Pitru devo bhava“. This is part of which Upanishad?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Mundaka Upanishad"
+        },
+        {
+          "letter": "B",
+          "text": "Taittariya Upanishad"
+        },
+        {
+          "letter": "C",
+          "text": "Isavasya Upanishad"
+        },
+        {
+          "letter": "D",
+          "text": "Mandukya Upanishad"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 21,
+      "question": "Which Purushārthas are primarily pursued in Gṛhastha Āśrama?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Dharma only"
+        },
+        {
+          "letter": "B",
+          "text": "Mokṣa only"
+        },
+        {
+          "letter": "C",
+          "text": "Dharma, Artha, and Kāma"
+        },
+        {
+          "letter": "D",
+          "text": "Kāma only"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 22,
+      "question": "Which Upaniṣadic idea supports the spiritual legitimacy of Gṛhastha life?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "“Neti neti” negates action"
+        },
+        {
+          "letter": "B",
+          "text": "Brahman can be realized only in solitude"
+        },
+        {
+          "letter": "C",
+          "text": "Life itself can be a yajña"
+        },
+        {
+          "letter": "D",
+          "text": "Knowledge arises only after renunciation"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 23,
+      "question": "Which scripture gives extensive guidance on the duties of a Gṛhastha?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Manusmṛti"
+        },
+        {
+          "letter": "B",
+          "text": "Nāṭyaśāstra"
+        },
+        {
+          "letter": "C",
+          "text": "Arthaśāstra"
+        },
+        {
+          "letter": "D",
+          "text": "Yoga Sūtras"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 24,
+      "question": "Which value best represents the ideal Gṛhastha life?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Detachment without responsibility"
+        },
+        {
+          "letter": "B",
+          "text": "Enjoyment without restraint"
+        },
+        {
+          "letter": "C",
+          "text": "Balance between worldly duties and spiritual life"
+        },
+        {
+          "letter": "D",
+          "text": "Total renunciation"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 25,
+      "question": "The first requisite is to install ______ in the heart and, with faith in the Divine, engage oneself in business.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Fear of God"
+        },
+        {
+          "letter": "B",
+          "text": "Fearlessness"
+        },
+        {
+          "letter": "C",
+          "text": "Morality"
+        },
+        {
+          "letter": "D",
+          "text": "Wisdom"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 26,
+      "question": "Physical Withdrawal vs Inner Renunciation; A retired professional moves to a secluded place, adopts simple clothing, and reduces social contact, but remains deeply attached to family recognition and control. According to Swami’s teachings, this situation represents:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Ideal Vānaprastha"
+        },
+        {
+          "letter": "B",
+          "text": "Correct external renunciation"
+        },
+        {
+          "letter": "C",
+          "text": "Incomplete Vānaprastha due to lack of inner detachment"
+        },
+        {
+          "letter": "D",
+          "text": "Proper preparation for Sannyāsa"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 27,
+      "question": "The primary discipline that sustains Sannyāsa is ________.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Intellectual debate"
+        },
+        {
+          "letter": "B",
+          "text": "Physical austerity"
+        },
+        {
+          "letter": "C",
+          "text": "Constant Self-inquiry"
+        },
+        {
+          "letter": "D",
+          "text": "Ritual precision"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 28,
+      "question": "“Tat Tvam Asi” occurs in which Upaniṣhad?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Bṛhadāraṇyaka"
+        },
+        {
+          "letter": "B",
+          "text": "Chāndogya"
+        },
+        {
+          "letter": "C",
+          "text": "Māṇḍūkya"
+        },
+        {
+          "letter": "D",
+          "text": "Taittirīya"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 29,
+      "question": "Seeking recognition or followers contradicts Sannyāsa because it strengthens ________.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Discipline"
+        },
+        {
+          "letter": "B",
+          "text": "Bhakti"
+        },
+        {
+          "letter": "C",
+          "text": "Ego-sense"
+        },
+        {
+          "letter": "D",
+          "text": "Knowledge"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 30,
+      "question": "The Mahāvākya “Aham Brahmāsmi” is from the:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Aitareya Upaniṣhad"
+        },
+        {
+          "letter": "B",
+          "text": "Chāndogya Upaniṣhad"
+        },
+        {
+          "letter": "C",
+          "text": "Bṛhadāraṇyaka Upaniṣhad"
+        },
+        {
+          "letter": "D",
+          "text": "Māṇḍūkya Upaniṣhad"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 31,
+      "question": "“Ayam Ātmā Brahma” is associated with the:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Ṛg Veda"
+        },
+        {
+          "letter": "B",
+          "text": "Sāma Veda"
+        },
+        {
+          "letter": "C",
+          "text": "Yajur Veda"
+        },
+        {
+          "letter": "D",
+          "text": "Atharva Veda"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 32,
+      "question": "External Renunciation vs Inner Detachment A man leaves his home, wears ochre robes, and lives in solitude. However, he frequently thinks about his past wealth and status and feels disturbed when not respected. According to the ideal of Sannyāsa, what is primarily lacking here?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Physical austerity"
+        },
+        {
+          "letter": "B",
+          "text": "Scriptural study"
+        },
+        {
+          "letter": "C",
+          "text": "Inner renunciation (Vairāgya)"
+        },
+        {
+          "letter": "D",
+          "text": "Social isolation"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 33,
+      "question": "Renunciation Without Fulfillment of Duties A person decides to take Sannyāsa while his dependent parents and young children are left without support. From a Dharmaśāstra perspective, this decision is:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Spiritually superior"
+        },
+        {
+          "letter": "B",
+          "text": "Encouraged for quick liberation"
+        },
+        {
+          "letter": "C",
+          "text": "Premature and adharma"
+        },
+        {
+          "letter": "D",
+          "text": "Irrelevant to spiritual life"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 34,
+      "question": "The Mahāvākya “Prajnanam Brahma” is from the:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Aitareya Upaniṣhad"
+        },
+        {
+          "letter": "B",
+          "text": "Chāndogya Upaniṣhad"
+        },
+        {
+          "letter": "C",
+          "text": "Bṛhadāraṇyaka Upaniṣhad"
+        },
+        {
+          "letter": "D",
+          "text": "Māṇḍūkya Upaniṣhad"
+        }
+      ],
+      "answer": "A"
+    }
   ],
   "4": [
-    {"number": 1, "question": "What opens the path of deep seeing?", "options": [{"letter": "A", "text": "Wealth"}, {"letter": "B", "text": "Knowledge"}, {"letter": "C", "text": "Fame"}, {"letter": "D", "text": "Power"}], "answer": "B"}
+    {
+      "number": 1,
+      "question": "The Vedas and Life Question: “The Vedas have the power to enable man to ____________ his life and make it ____________.” Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Sublime, Transmute"
+        },
+        {
+          "letter": "B",
+          "text": "Elongate, happy"
+        },
+        {
+          "letter": "C",
+          "text": "Transmute, Sublime"
+        },
+        {
+          "letter": "D",
+          "text": "Empower, long and happy"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 2,
+      "question": "Comfort, Success, and Vedic Life Question: “Comfort nourishes your ______. Success nourishes your ______. Vedic life nourishes your ______.” Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Body, soul, mind"
+        },
+        {
+          "letter": "B",
+          "text": "Body, Ego, mind"
+        },
+        {
+          "letter": "C",
+          "text": "Ego, Mind, Soul"
+        },
+        {
+          "letter": "D",
+          "text": "Body, Mind, Soul"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 3,
+      "question": "Dharma Protection Question: “If you protect ___________, __________ will protect you.” Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Dharma, Dharma"
+        },
+        {
+          "letter": "B",
+          "text": "Everyone, Dharma"
+        },
+        {
+          "letter": "C",
+          "text": "Others, I"
+        },
+        {
+          "letter": "D",
+          "text": "Dharma, I"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 4,
+      "question": "The ABC of Life Question: “The ABC of life is:” Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Always be clean"
+        },
+        {
+          "letter": "B",
+          "text": "Avoid bad company"
+        },
+        {
+          "letter": "C",
+          "text": "Always be careful"
+        },
+        {
+          "letter": "D",
+          "text": "Always be creative"
+        },
+        {
+          "letter": "E",
+          "text": "Both A & C"
+        }
+      ],
+      "answer": "E"
+    },
+    {
+      "number": 5,
+      "question": "Loss Hierarchy Question: “If ______ is lost, nothing is lost; if ______ is lost, something is lost; if ________ is lost, everything is lost.” Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "money, health, character"
+        },
+        {
+          "letter": "B",
+          "text": "health, money, character"
+        },
+        {
+          "letter": "C",
+          "text": "character, money, health"
+        },
+        {
+          "letter": "D",
+          "text": "money, character, health"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "number": 6,
+      "question": "Ultimate Goal of Gṛhastha Āśrama Question: What is the ultimate goal of Gṛhastha Āśrama? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Permanent enjoyment of worldly life"
+        },
+        {
+          "letter": "B",
+          "text": "Accumulation of wealth"
+        },
+        {
+          "letter": "C",
+          "text": "Preparation for higher spiritual stages"
+        },
+        {
+          "letter": "D",
+          "text": "Avoidance of spiritual pursuits"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 7,
+      "question": "Pañca Mahāyajñas Purpose Question: The Pañca Mahāyajñas primarily aim to: Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Ensure ritual purity alone"
+        },
+        {
+          "letter": "B",
+          "text": "Accumulate religious merit only"
+        },
+        {
+          "letter": "C",
+          "text": "Repay existential debts (ṛṇa)"
+        },
+        {
+          "letter": "D",
+          "text": "Prepare for forest life"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 8,
+      "question": "Bhagavad Gītā on Gṛhastha Life Question: Which statement best reflects the Bhagavad Gītā’s view relevant to Gṛhastha life? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Renunciation alone leads to liberation"
+        },
+        {
+          "letter": "B",
+          "text": "Action without desire is inferior"
+        },
+        {
+          "letter": "C",
+          "text": "Action performed as yajña sustains cosmic order"
+        },
+        {
+          "letter": "D",
+          "text": "Household life binds one permanently"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 9,
+      "question": "Distinguishing Dhārmic Gṛhastha Question: Which quality distinguishes a Dhārmic Gṛhastha from a worldly householder? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Withdrawal from society"
+        },
+        {
+          "letter": "B",
+          "text": "Performance of duty without attachment to fruits"
+        },
+        {
+          "letter": "C",
+          "text": "Complete suppression of desires"
+        },
+        {
+          "letter": "D",
+          "text": "Exclusive focus on ritualism"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 10,
+      "question": "Charity in Gṛhastha Life Question: In traditional Hindu thought, a Gṛhastha’s charity is most meritorious when: Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Given publicly"
+        },
+        {
+          "letter": "B",
+          "text": "Given under compulsion"
+        },
+        {
+          "letter": "C",
+          "text": "Given with humility and discrimination"
+        },
+        {
+          "letter": "D",
+          "text": "Given only to family"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 11,
+      "question": "Transition to Vānaprastha Question: The transition from Gṛhastha to Vānaprastha ideally occurs when: Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Desire is exhausted"
+        },
+        {
+          "letter": "B",
+          "text": "Old age begins"
+        },
+        {
+          "letter": "C",
+          "text": "Social and familial duties are fulfilled"
+        },
+        {
+          "letter": "D",
+          "text": "Wealth is fully renounced"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 12,
+      "question": "Case Study – Wealth vs Dharma Scenario: A successful merchant discovers that adopting a questionable but legal business practice will significantly increase his wealth, allowing him to donate more. However, the practice involves subtle exploitation. Question: What is the most dhārmic response? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Adopt the practice since charity justifies the means"
+        },
+        {
+          "letter": "B",
+          "text": "Reject the practice, as Artha must be earned in alignment with Dharma"
+        },
+        {
+          "letter": "C",
+          "text": "Adopt it temporarily and renounce later"
+        },
+        {
+          "letter": "D",
+          "text": "Delegate the decision to others to avoid responsibility"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 13,
+      "question": "Case Study – Hospitality vs Household Resources Scenario: A guest arrives unexpectedly at night when the household has very limited food, barely enough for the family. Question: What is the most dhārmic response? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Turn the guest away politely"
+        },
+        {
+          "letter": "B",
+          "text": "Share food equally with the guest"
+        },
+        {
+          "letter": "C",
+          "text": "Feed the guest first, even at personal discomfort"
+        },
+        {
+          "letter": "D",
+          "text": "Offer verbal respect but no food"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 14,
+      "question": "Case Study – Desire vs Discipline Scenario: A Gṛhastha indulges in luxury and pleasure, arguing that Kāma is sanctioned in his āśrama. Question: Which view best reflects śāstric teaching? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Kāma is unrestricted in Gṛhastha life"
+        },
+        {
+          "letter": "B",
+          "text": "Kāma is equal to Dharma"
+        },
+        {
+          "letter": "C",
+          "text": "Kāma is permitted only when regulated by Dharma"
+        },
+        {
+          "letter": "D",
+          "text": "Kāma must be fully renounced"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 15,
+      "question": "Detachment vs Neglect Scenario: A Gṛhastha begins practicing detachment and neglects family responsibilities. Question: How do śāstras evaluate this? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Detachment excuses social obligations"
+        },
+        {
+          "letter": "B",
+          "text": "Spiritual pursuit begins only after neglecting duties"
+        },
+        {
+          "letter": "C",
+          "text": "True detachment includes responsible engagement"
+        },
+        {
+          "letter": "D",
+          "text": "Family life obstructs spirituality"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 16,
+      "question": "Charity vs Discernment Scenario: A Gṛhastha gives generously to all beggars, including those known to misuse charity. Question: What is the correct dhārmic stance? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Charity must be indiscriminate"
+        },
+        {
+          "letter": "B",
+          "text": "Charity should be avoided altogether"
+        },
+        {
+          "letter": "C",
+          "text": "Charity must be guided by विवेक (discernment)"
+        },
+        {
+          "letter": "D",
+          "text": "Charity should be limited to rituals"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 17,
+      "question": "Justice vs Personal Loyalty Scenario: A Gṛhastha in a position of authority discovers wrongdoing by a close relative. Question: What is the Dhārmic response? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Protect family at all costs"
+        },
+        {
+          "letter": "B",
+          "text": "Ignore the matter"
+        },
+        {
+          "letter": "C",
+          "text": "Act impartially, without hatred or favoritism"
+        },
+        {
+          "letter": "D",
+          "text": "Resign from responsibility"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 18,
+      "question": "Purushārtha in Vānaprastha Question: Which Purushārtha becomes dominant during Vānaprastha? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Kāma"
+        },
+        {
+          "letter": "B",
+          "text": "Artha"
+        },
+        {
+          "letter": "C",
+          "text": "Dharma"
+        },
+        {
+          "letter": "D",
+          "text": "Mokṣa"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "number": 19,
+      "question": "Psychological Discipline of Vānaprastha Question: The central psychological discipline of Vānaprastha is: Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Suppression of emotions"
+        },
+        {
+          "letter": "B",
+          "text": "Cultivation of Vairāgya (dispassion)"
+        },
+        {
+          "letter": "C",
+          "text": "Elimination of action"
+        },
+        {
+          "letter": "D",
+          "text": "Silence alone"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "number": 20,
+      "question": "Inward Turn in Vānaprastha Question: According to Upaniṣhadic thought, the Vānaprastha’s inward turn supports: Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Ritual mastery"
+        },
+        {
+          "letter": "B",
+          "text": "Social reform"
+        },
+        {
+          "letter": "C",
+          "text": "Inquiry into the Self (Ātma-vidyā)"
+        },
+        {
+          "letter": "D",
+          "text": "Economic simplicity"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 21,
+      "question": "Mahāvākyas Remove Question: In Advaita Vedānta, Mahāvākyas remove: Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Sin"
+        },
+        {
+          "letter": "B",
+          "text": "Karma"
+        },
+        {
+          "letter": "C",
+          "text": "Ignorance (Avidyā)"
+        },
+        {
+          "letter": "D",
+          "text": "Desire"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 22,
+      "question": "Ultimate Truth in Mahāvākyas Question: Ultimately, Mahāvākyas point to the truth that: Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Brahman is far away"
+        },
+        {
+          "letter": "B",
+          "text": "Liberation is future-oriented"
+        },
+        {
+          "letter": "C",
+          "text": "The Self is already free"
+        },
+        {
+          "letter": "D",
+          "text": "Knowledge is ritual-dependent"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 23,
+      "question": "Śaṅkarācārya on Mahāvākyas Question: According to Śaṅkarācārya, Mahāvākyas reveal: Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Similarity between Ātman and Brahman"
+        },
+        {
+          "letter": "B",
+          "text": "Near identity of jīva and Īśvara"
+        },
+        {
+          "letter": "C",
+          "text": "Absolute non-difference between Ātman and Brahman"
+        },
+        {
+          "letter": "D",
+          "text": "Temporary union"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 24,
+      "question": "Knowledge vs Experience Scenario: Student: “I have memorized all four Mahāvākyas. Am I liberated?” Teacher: “A hungry man who knows the word ‘food’—is he satisfied?” Student: “No, Master.” Teacher: “So too is mere verbal knowledge.” Question: What deficiency is the teacher pointing out? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Lack of ritual purity"
+        },
+        {
+          "letter": "B",
+          "text": "Absence of intellectual study"
+        },
+        {
+          "letter": "C",
+          "text": "Lack of direct realization through contemplation"
+        },
+        {
+          "letter": "D",
+          "text": "Inadequate devotion"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 25,
+      "question": "Function of Mahāvākyas Question: Which of the following best describes the function of a Mahāvākya? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Moral instruction"
+        },
+        {
+          "letter": "B",
+          "text": "Philosophical speculation"
+        },
+        {
+          "letter": "C",
+          "text": "Direct revelation of Truth"
+        },
+        {
+          "letter": "D",
+          "text": "Symbolic poetry"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 26,
+      "question": "Role of the Guru Scenario: Student: “Can I understand Mahāvākyas on my own?” Teacher: “A mirror is needed to see your face. Is it not?” Question: What role of the guru is emphasized here? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Authority figure"
+        },
+        {
+          "letter": "B",
+          "text": "Moral instructor"
+        },
+        {
+          "letter": "C",
+          "text": "Means of right knowledge (Pramāṇa-helper)"
+        },
+        {
+          "letter": "D",
+          "text": "Ritual performer"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 27,
+      "question": "Duality vs Non-Duality Scenario: Student: “If Brahman alone exists, why do I see multiplicity?” Teacher: “When you dream, are there many worlds or one mind?” Student: “One mind.” Question: What Advaitic principle is being taught? Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Creation is real"
+        },
+        {
+          "letter": "B",
+          "text": "World is unreal"
+        },
+        {
+          "letter": "C",
+          "text": "Apparent multiplicity arises from ignorance"
+        },
+        {
+          "letter": "D",
+          "text": "Dreams are superior to waking"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "number": 28,
+      "question": "Final Insight Scenario: Student: “What remains after understanding all Mahāvākyas?” Teacher: “Nothing to gain—only false notions drop away.” Question: This statement indicates that liberation is: Options:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A future attainment"
+        },
+        {
+          "letter": "B",
+          "text": "A mystical experience"
+        },
+        {
+          "letter": "C",
+          "text": "Recognition of an ever-free Self"
+        },
+        {
+          "letter": "D",
+          "text": "Reward for effort"
+        }
+      ],
+      "answer": "C"
+    }
   ]
 }
