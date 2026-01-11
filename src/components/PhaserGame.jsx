@@ -7,6 +7,7 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
     const containerRef = useRef(null)
     const gameRef = useRef(null)
     const correctAnswersRef = useRef(0);
+    const walkingSoundRef = useRef(null);
 
     // Keep track of correct answers in a ref
     useEffect(() => {
@@ -31,6 +32,8 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
         let gate // Gate reference for continuous checking
         let gateTriggered = false // Prevent multiple triggers
         let sceneRef // Reference to scene for update function
+        let walkingSound // Walking sound effect
+        let bookSound // Book collection sound effect
 
         // Define game dimensions and spawn areas
         const GAME_WIDTH = 800;
@@ -79,12 +82,22 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             scene.load.image('floor_1', '/assets/floor_1.png');
             scene.load.image('sand1', '/assets/sand1.png');
             scene.load.image('stone1', '/assets/stone1.png');
+            // Load sound effects
+            scene.load.audio('walking', '/assets/walking.mp3');
+            scene.load.audio('bookCollect', '/assets/book.mp3');
         }
 
         function create() {
             const scene = this; 
             sceneRef = scene; // Store scene reference
             score = 0;
+            
+            // Create walking sound effect
+            walkingSound = scene.sound.add('walking', { loop: true, volume: 0.3 });
+            walkingSoundRef.current = walkingSound;
+            
+            // Create book collection sound effect
+            bookSound = scene.sound.add('bookCollect', { volume: 0.5 });
             
             // --- TILEMAP BACKGROUND ---
             // Determine which tile to use based on level
@@ -231,6 +244,11 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 // Only collect if book hasn't been collected yet
                 if (v.body.enable === false) return;
                 
+                // Play book collection sound
+                if (bookSound) {
+                    bookSound.play();
+                }
+                
                 // Disable and hide the book
                 v.body.enable = false; // 1. Turn off physics so you can't hit it again
                 v.setVisible(false);   // 2. Make it invisible
@@ -274,8 +292,16 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             // Play or stop walking animation
             if (isMoving) {
                 player.anims.play('walk', true);
+                // Play walking sound if not already playing
+                if (walkingSound && !walkingSound.isPlaying) {
+                    walkingSound.play();
+                }
             } else {
                 player.anims.play('idle', true);
+                // Stop walking sound
+                if (walkingSound && walkingSound.isPlaying) {
+                    walkingSound.stop();
+                }
             }
         }
 
@@ -338,6 +364,13 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
                 if (player) {
                     scene.physics.add.overlap(player, book, (p, v) => {
                         if (v.body.enable === false) return;
+                        
+                        // Play book collection sound
+                        const bookSound = scene.sound.get('bookCollect');
+                        if (bookSound) {
+                            bookSound.play();
+                        }
+                        
                         v.body.enable = false;
                         v.setVisible(false);
                         if (onCollectVeda) onCollectVeda(v.getData('id'));
@@ -353,6 +386,18 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             const scene = gameRef.current.scene.scenes[0];
             
             if (isQuizActive) {
+                // Find the player and set to idle
+                const player = scene.children.list.find(child => child.anims && child.anims.currentAnim);
+                if (player) {
+                    player.body.setVelocity(0);
+                    player.anims.play('idle', true);
+                }
+                
+                // Stop walking sound immediately
+                if (walkingSoundRef.current && walkingSoundRef.current.isPlaying) {
+                    walkingSoundRef.current.stop();
+                }
+                
                 // Disable keyboard input
                 if (gameRef.current.input && gameRef.current.input.keyboard) {
                     gameRef.current.input.keyboard.enabled = false;

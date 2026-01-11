@@ -15,6 +15,11 @@ export default function App() {
   const [penaltyBooks, setPenaltyBooks] = useState(0); // Extra books needed due to wrong answers
   const [usedQuestionIndices, setUsedQuestionIndices] = useState([]); // Track which questions have been used
   const [booksPerLevel] = useState(3); // Base number of books per level
+  
+  // Audio ref for background music
+  const audioRef = useRef(null);
+  // Audio ref for door sound effect
+  const doorSoundRef = useRef(null);
 
   // Use refs to store the latest values for use in Phaser callbacks
   const quizQuestionsRef = useRef({});
@@ -55,6 +60,37 @@ export default function App() {
       .catch(error => {
         console.error('Error loading quiz questions:', error);
       });
+  }, []);
+  
+  // Setup background music
+  useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio('/assets/bgm.mp3');
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0.5;
+      
+      // Play music on first user interaction
+      const playMusic = () => {
+        audioRef.current.play().catch(err => console.log('Audio play prevented:', err));
+        document.removeEventListener('click', playMusic);
+        document.removeEventListener('keydown', playMusic);
+      };
+      
+      document.addEventListener('click', playMusic);
+      document.addEventListener('keydown', playMusic);
+    }
+    
+    // Initialize door sound effect
+    if (!doorSoundRef.current) {
+      doorSoundRef.current = new Audio('/assets/door.mp3');
+      doorSoundRef.current.volume = 0.7;
+    }
+    
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
   }, []);
 
   // Check if we have questions for current level
@@ -147,6 +183,11 @@ export default function App() {
       if (answeredBooks.length + 1 >= totalBooksRequired) {
         // Show message that gate is now open
         setTimeout(() => {
+          // Play door opening sound
+          if (doorSoundRef.current) {
+            doorSoundRef.current.currentTime = 0;
+            doorSoundRef.current.play().catch(err => console.log('Door sound play error:', err));
+          }
           alert("All wisdom collected! The gate is now open. Proceed to ascend!");
         }, 500);
       }
