@@ -178,8 +178,12 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             
             // Set up camera to follow player horizontally on mobile
             if (isMobile) {
-                scene.cameras.main.startFollow(player, false, 0.1, 0); // Follow horizontally only
+                // Set world bounds for camera
                 scene.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
+                // Follow player with horizontal lerp only
+                scene.cameras.main.startFollow(player, false, 0.1, 1);
+                // Set deadzone so camera only moves when player moves significantly
+                scene.cameras.main.setDeadzone(150, 300);
             }
 
             // Create walking animation
