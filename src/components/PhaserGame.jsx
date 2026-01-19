@@ -3,16 +3,22 @@ import Phaser from 'phaser'
 
 // This component now only handles Physics and Inputs. 
 // It sends signals (props) up to App.jsx when things happen.
-export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive, restartKey, correctAnswersCount, totalBooksRequired }) {
+export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, isQuizActive, restartKey, correctAnswersCount, totalBooksRequired, externalControls }) {
     const containerRef = useRef(null)
     const gameRef = useRef(null)
     const correctAnswersRef = useRef(0);
     const walkingSoundRef = useRef(null);
+    const externalControlsRef = useRef({});
 
     // Keep track of correct answers in a ref
     useEffect(() => {
         correctAnswersRef.current = correctAnswersCount || 0;
     }, [correctAnswersCount]);
+
+    // Keep track of external controls in a ref for update function access
+    useEffect(() => {
+        externalControlsRef.current = externalControls || {};
+    }, [externalControls]);
 
     useEffect(() => {
         if (!containerRef.current) return
@@ -284,23 +290,26 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
 
             let isMoving = false;
 
-            // Movement Logic
-            if (keys.A.isDown || (cursors && cursors.left.isDown)) {
+            // Get external controls (from D-pad)
+            const extControls = externalControlsRef.current;
+
+            // Movement Logic - Check both keyboard and external controls (D-pad)
+            if (keys.A.isDown || (cursors && cursors.left.isDown) || extControls.left) {
                 player.body.setVelocityX(-200)
                 player.setFlipX(true);
                 isMoving = true;
             }
-            else if (keys.D.isDown || (cursors && cursors.right.isDown)) {
+            else if (keys.D.isDown || (cursors && cursors.right.isDown) || extControls.right) {
                 player.body.setVelocityX(200)
                 player.setFlipX(false);
                 isMoving = true;
             }
 
-            if (keys.W.isDown || (cursors && cursors.up.isDown)) {
+            if (keys.W.isDown || (cursors && cursors.up.isDown) || extControls.up) {
                 player.body.setVelocityY(-200)
                 isMoving = true;
             }
-            else if (keys.S.isDown || (cursors && cursors.down.isDown)) {
+            else if (keys.S.isDown || (cursors && cursors.down.isDown) || extControls.down) {
                 player.body.setVelocityY(200)
                 isMoving = true;
             }
