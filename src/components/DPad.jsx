@@ -1,30 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './DPad.css';
 
 export default function DPad({ onDirectionPress, onDirectionRelease, disabled }) {
+  // Reset all controls when disabled (e.g., when quiz appears)
+  useEffect(() => {
+    if (disabled) {
+      // Release all directions
+      onDirectionRelease('up');
+      onDirectionRelease('down');
+      onDirectionRelease('left');
+      onDirectionRelease('right');
+    }
+  }, [disabled, onDirectionRelease]);
+
   const handleTouchStart = (direction) => (e) => {
-    e.preventDefault();
     if (!disabled) {
       onDirectionPress(direction);
     }
   };
 
   const handleTouchEnd = (direction) => (e) => {
-    e.preventDefault();
     if (!disabled) {
       onDirectionRelease(direction);
     }
   };
 
   const handleMouseDown = (direction) => (e) => {
-    e.preventDefault();
     if (!disabled) {
       onDirectionPress(direction);
     }
   };
 
   const handleMouseUp = (direction) => (e) => {
-    e.preventDefault();
     if (!disabled) {
       onDirectionRelease(direction);
     }
