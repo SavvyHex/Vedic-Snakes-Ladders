@@ -173,6 +173,15 @@ export default function PhaserGame({ currentLevel, onCollectVeda, onReachGate, i
             scene.physics.add.existing(player)
             player.body.setCollideWorldBounds(true)
 
+            // Check if mobile device
+            const isMobile = window.innerWidth <= 768;
+            
+            // Set up camera to follow player horizontally on mobile
+            if (isMobile) {
+                scene.cameras.main.startFollow(player, false, 0.1, 0); // Follow horizontally only
+                scene.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
+            }
+
             // Create walking animation
             scene.anims.create({
                 key: 'walk',
