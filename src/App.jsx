@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PhaserGame from './components/PhaserGame';
+import DPad from './components/DPad';
 import { loadQuizQuestions } from './data/quizParser';
 import './index.css'; 
 
@@ -15,6 +16,7 @@ export default function App() {
   const [penaltyBooks, setPenaltyBooks] = useState(0); // Extra books needed due to wrong answers
   const [usedQuestionIndices, setUsedQuestionIndices] = useState([]); // Track which questions have been used
   const [booksPerLevel] = useState(3); // Base number of books per level
+  const [dpadControls, setDpadControls] = useState({ up: false, down: false, left: false, right: false }); // D-pad state
   
   // Audio ref for background music
   const audioRef = useRef(null);
@@ -234,6 +236,15 @@ export default function App() {
         setCurrentLevel(1); // Loop back to start
     }
   };
+
+  // D-pad control handlers
+  const handleDirectionPress = useCallback((direction) => {
+    setDpadControls(prev => ({ ...prev, [direction]: true }));
+  }, []);
+
+  const handleDirectionRelease = useCallback((direction) => {
+    setDpadControls(prev => ({ ...prev, [direction]: false }));
+  }, []);
   
   return (
     <div style={{ display: 'flex', flexDirection: 'column', padding: '20px', backgroundColor: '#1a1a1a', minHeight: '100vh' }}>
@@ -253,6 +264,14 @@ export default function App() {
           restartKey={restartKey}
           correctAnswersCount={answeredBooks.length}
           totalBooksRequired={totalBooksRequired}
+          externalControls={dpadControls}
+        />
+
+        {/* D-PAD CONTROLS - Hidden on desktop, visible on mobile */}
+        <DPad 
+          onDirectionPress={handleDirectionPress}
+          onDirectionRelease={handleDirectionRelease}
+          disabled={showQuiz}
         />
       </div>
 
